@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import config from './env.js';
 
 const connectDB = async (retries = 3) => {
-  const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/emr-application';
+  const uri = config.mongodbUri;
   for (let i = 0; i < retries; i++) {
     try {
       const conn = await mongoose.connect(uri, {
@@ -21,14 +22,20 @@ const connectDB = async (retries = 3) => {
         // Set short buffer timeout so API calls fail fast with clear error
         mongoose.set('bufferTimeoutMS', 3000);
         console.warn('MongoDB not available — server will start without DB. Retrying in background...');
-        // Retry in background every 10s
+        // Retry in background every 10s, max 30 attempts (5 minutes)
+        let bgAttempts = 0;
         const bgRetry = async () => {
+          if (bgAttempts >= 30) {
+            console.error('MongoDB background retry limit reached (30 attempts). Giving up.');
+            return;
+          }
+          bgAttempts++;
           try {
             await mongoose.connect(uri, {
               serverSelectionTimeoutMS: 5000,
               connectTimeoutMS: 5000,
             });
-            console.log(`MongoDB connected (background retry): ${mongoose.connection.host}`);
+            console.log(`MongoDB connected (background retry #${bgAttempts}): ${mongoose.connection.host}`);
           } catch {
             setTimeout(bgRetry, 10000);
           }
