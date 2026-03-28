@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 
-const connectDB = async (retries = 2) => {
-  const uri = process.env.MONGODB_URI || 'mongodb://192.168.80.1:27017/emr-application';
+const connectDB = async (retries = 3) => {
+  const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/emr-application';
   for (let i = 0; i < retries; i++) {
     try {
       const conn = await mongoose.connect(uri, {
-        serverSelectionTimeoutMS: 5000,
-        connectTimeoutMS: 5000,
+        serverSelectionTimeoutMS: 15000,
+        connectTimeoutMS: 15000,
+        socketTimeoutMS: 45000,
         bufferCommands: true,
-        // Fail fast if not connected — 3s buffer timeout instead of 10s default
       });
       mongoose.set('bufferTimeoutMS', 3000);
       console.log(`MongoDB connected: ${conn.connection.host}`);

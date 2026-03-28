@@ -4,6 +4,9 @@
   "type": "module",
   "description": "EMR Application Backend - Express + MongoDB",
   "main": "src/index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",

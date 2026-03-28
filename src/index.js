@@ -31,9 +31,18 @@ const app = express();
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: config.nodeEnv === 'development'
-    ? (origin, callback) => callback(null, true)
-    : config.corsOrigin.split(',').map(o => o.trim()),
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, server-to-server)
+    if (!origin) return callback(null, true);
+    // In development, allow everything
+    if (config.nodeEnv === 'development') return callback(null, true);
+    // In production, check against allowed origins
+    const allowed = config.corsOrigin.split(',').map(o => o.trim());
+    if (allowed.some(a => origin === a || origin.endsWith('.onrender.com'))) {
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
 }));
 app.use(morgan('dev'));
