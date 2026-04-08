@@ -10,6 +10,7 @@ import {
   searchExaminationFindings,
   searchProcedures,
   getSalutations,
+  bulkImport,
 } from '../controllers/masters.controller.js';
 
 const router = Router();
@@ -25,5 +26,6 @@ router.get('/examination-findings', searchExaminationFindings);
 router.get('/procedures', searchProcedures);
 router.get('/salutations', getSalutations);
 router.post('/services', createService);
+router.post('/bulk-import', bulkImport);
 
 export default router;

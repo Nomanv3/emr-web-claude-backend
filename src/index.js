@@ -1,11 +1,9 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 import connectDB from './config/db.js';
 import config from './config/env.js';
@@ -34,13 +32,13 @@ app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (mobile apps, curl, server-to-server)
     if (!origin) return callback(null, true);
-    // In development, allow everything
-    if (config.nodeEnv === 'development') return callback(null, true);
-    // In production, check against allowed origins
+    // Allow any localhost origin (any port) for local development
+    if (/^https?:\/\/localhost(:\d+)?$/.test(origin)) return callback(null, true);
+    // Allow Render and Vercel deployments
+    if (origin.endsWith('.onrender.com') || origin.endsWith('.vercel.app')) return callback(null, true);
+    // Check against explicitly allowed origins
     const allowed = config.corsOrigin.split(',').map(o => o.trim());
-    if (allowed.some(a => origin === a || origin.endsWith('.onrender.com'))) {
-      return callback(null, true);
-    }
+    if (allowed.includes(origin)) return callback(null, true);
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,

@@ -937,53 +937,112 @@ async function seed() {
     await Receipt.insertMany(receiptsData);
     console.log(`Created ${receiptsData.length} receipts`);
 
-    // ─── Dropdown Options (~80 options) ─────────────────────────────
+    // ─── Dropdown Options (~80 options) with Hindi (hi) & Marathi (mr) translations ─────
     let dropdownId = 1;
+
+    // Helper to build dropdown entry with translations
+    const dd = (section, option_key, option_value, hi, mr, i) => ({
+      dropdown_option_id: dropdownId++, section, option_key, option_value,
+      translations: { hi, mr },
+      sort_order: i + 1, is_active: true,
+    });
+
     const dropdownOptions = [
       // Medication - dosage (10)  IDs 1-10
-      ...['Once daily (OD)', 'Twice daily (BD)', 'Thrice daily (TDS)', 'Four times daily (QID)', 'Half tablet', 'One tablet', 'Two tablets', '5ml', '10ml', 'As directed'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'medication', option_key: 'dosage', option_value: v, sort_order: i + 1, is_active: true,
-      })),
+      dd('medication', 'dosage', 'Once daily (OD)', 'दिन में एक बार (OD)', 'दिवसातून एकदा (OD)', 0),
+      dd('medication', 'dosage', 'Twice daily (BD)', 'दिन में दो बार (BD)', 'दिवसातून दोनदा (BD)', 1),
+      dd('medication', 'dosage', 'Thrice daily (TDS)', 'दिन में तीन बार (TDS)', 'दिवसातून तीनदा (TDS)', 2),
+      dd('medication', 'dosage', 'Four times daily (QID)', 'दिन में चार बार (QID)', 'दिवसातून चारदा (QID)', 3),
+      dd('medication', 'dosage', 'Half tablet', 'आधी गोली', 'अर्धी गोळी', 4),
+      dd('medication', 'dosage', 'One tablet', 'एक गोली', 'एक गोळी', 5),
+      dd('medication', 'dosage', 'Two tablets', 'दो गोलियाँ', 'दोन गोळ्या', 6),
+      dd('medication', 'dosage', '5ml', '५ मिली', '५ मिली', 7),
+      dd('medication', 'dosage', '10ml', '१० मिली', '१० मिली', 8),
+      dd('medication', 'dosage', 'As directed', 'निर्देशानुसार', 'निर्देशानुसार', 9),
+
       // Medication - frequency (8)  IDs 11-18
-      ...['Once a day', 'Twice a day', 'Three times a day', 'Four times a day', 'Every 6 hours', 'Every 8 hours', 'Every 12 hours', 'As needed (SOS)'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'medication', option_key: 'frequency', option_value: v, sort_order: i + 1, is_active: true,
-      })),
+      dd('medication', 'frequency', 'Once a day', 'दिन में एक बार', 'दिवसातून एकदा', 0),
+      dd('medication', 'frequency', 'Twice a day', 'दिन में दो बार', 'दिवसातून दोनदा', 1),
+      dd('medication', 'frequency', 'Three times a day', 'दिन में तीन बार', 'दिवसातून तीन वेळा', 2),
+      dd('medication', 'frequency', 'Four times a day', 'दिन में चार बार', 'दिवसातून चार वेळा', 3),
+      dd('medication', 'frequency', 'Every 6 hours', 'हर ६ घंटे', 'दर ६ तासांनी', 4),
+      dd('medication', 'frequency', 'Every 8 hours', 'हर ८ घंटे', 'दर ८ तासांनी', 5),
+      dd('medication', 'frequency', 'Every 12 hours', 'हर १२ घंटे', 'दर १२ तासांनी', 6),
+      dd('medication', 'frequency', 'As needed (SOS)', 'आवश्यकतानुसार (SOS)', 'गरजेनुसार (SOS)', 7),
+
       // Medication - timing (8)  IDs 19-26
-      ...['Before food', 'After food', 'With food', 'Empty stomach', 'Morning', 'Night', 'Morning and Night', 'Bedtime'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'medication', option_key: 'timing', option_value: v, sort_order: i + 1, is_active: true,
-      })),
+      dd('medication', 'timing', 'Before food', 'खाने से पहले', 'जेवणापूर्वी', 0),
+      dd('medication', 'timing', 'After food', 'खाने के बाद', 'जेवणानंतर', 1),
+      dd('medication', 'timing', 'With food', 'खाने के साथ', 'जेवणासोबत', 2),
+      dd('medication', 'timing', 'Empty stomach', 'खाली पेट', 'रिकाम्या पोटी', 3),
+      dd('medication', 'timing', 'Morning', 'सुबह', 'सकाळी', 4),
+      dd('medication', 'timing', 'Night', 'रात', 'रात्री', 5),
+      dd('medication', 'timing', 'Morning and Night', 'सुबह और रात', 'सकाळी आणि रात्री', 6),
+      dd('medication', 'timing', 'Bedtime', 'सोने से पहले', 'झोपण्यापूर्वी', 7),
+
       // Medication - duration (10)  IDs 27-36
-      ...['3 days', '5 days', '7 days', '10 days', '14 days', '1 month', '2 months', '3 months', '6 months', 'Ongoing'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'medication', option_key: 'duration', option_value: v, sort_order: i + 1, is_active: true,
-      })),
+      dd('medication', 'duration', '3 days', '३ दिन', '३ दिवस', 0),
+      dd('medication', 'duration', '5 days', '५ दिन', '५ दिवस', 1),
+      dd('medication', 'duration', '7 days', '७ दिन', '७ दिवस', 2),
+      dd('medication', 'duration', '10 days', '१० दिन', '१० दिवस', 3),
+      dd('medication', 'duration', '14 days', '१४ दिन', '१४ दिवस', 4),
+      dd('medication', 'duration', '1 month', '१ महीना', '१ महिना', 5),
+      dd('medication', 'duration', '2 months', '२ महीने', '२ महिने', 6),
+      dd('medication', 'duration', '3 months', '३ महीने', '३ महिने', 7),
+      dd('medication', 'duration', '6 months', '६ महीने', '६ महिने', 8),
+      dd('medication', 'duration', 'Ongoing', 'जारी', 'चालू', 9),
+
       // Medication - start_from (5)  IDs 37-41
-      ...['Today', 'Tomorrow', 'After 3 days', 'After 1 week', 'As advised'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'medication', option_key: 'start_from', option_value: v, sort_order: i + 1, is_active: true,
-      })),
+      dd('medication', 'start_from', 'Today', 'आज से', 'आजपासून', 0),
+      dd('medication', 'start_from', 'Tomorrow', 'कल से', 'उद्यापासून', 1),
+      dd('medication', 'start_from', 'After 3 days', '३ दिन बाद', '३ दिवसांनंतर', 2),
+      dd('medication', 'start_from', 'After 1 week', '१ सप्ताह बाद', '१ आठवड्यानंतर', 3),
+      dd('medication', 'start_from', 'As advised', 'सलाह अनुसार', 'सल्ल्यानुसार', 4),
+
       // Medication - condition (5)  IDs 42-46
-      ...['If fever', 'If pain', 'If nausea', 'If needed', 'As required'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'medication', option_key: 'condition', option_value: v, sort_order: i + 1, is_active: true,
-      })),
+      dd('medication', 'condition', 'If fever', 'बुखार होने पर', 'ताप आल्यास', 0),
+      dd('medication', 'condition', 'If pain', 'दर्द होने पर', 'वेदना झाल्यास', 1),
+      dd('medication', 'condition', 'If nausea', 'मतली होने पर', 'मळमळ झाल्यास', 2),
+      dd('medication', 'condition', 'If needed', 'आवश्यकता होने पर', 'गरज पडल्यास', 3),
+      dd('medication', 'condition', 'As required', 'आवश्यकतानुसार', 'गरजेनुसार', 4),
+
       // Symptoms - severity (5)  IDs 47-51
-      ...['Mild', 'Moderate', 'Severe', 'Very Severe', 'Critical'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'symptoms', option_key: 'severity', option_value: v, sort_order: i + 1, is_active: true,
-      })),
+      dd('symptoms', 'severity', 'Mild', 'हल्का', 'सौम्य', 0),
+      dd('symptoms', 'severity', 'Moderate', 'मध्यम', 'मध्यम', 1),
+      dd('symptoms', 'severity', 'Severe', 'गंभीर', 'तीव्र', 2),
+      dd('symptoms', 'severity', 'Very Severe', 'अत्यंत गंभीर', 'अत्यंत तीव्र', 3),
+      dd('symptoms', 'severity', 'Critical', 'गंभीर स्थिति', 'गंभीर', 4),
+
       // Symptoms - laterality (4)  IDs 52-55
-      ...['Left', 'Right', 'Bilateral', 'Not applicable'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'symptoms', option_key: 'laterality', option_value: v, sort_order: i + 1, is_active: true,
-      })),
+      dd('symptoms', 'laterality', 'Left', 'बायाँ', 'डावीकडे', 0),
+      dd('symptoms', 'laterality', 'Right', 'दायाँ', 'उजवीकडे', 1),
+      dd('symptoms', 'laterality', 'Bilateral', 'दोनों तरफ', 'दोन्ही बाजूंनी', 2),
+      dd('symptoms', 'laterality', 'Not applicable', 'लागू नहीं', 'लागू नाही', 3),
+
       // Diagnosis - status (5)  IDs 56-60
-      ...['Confirmed', 'Suspected', 'Provisional', 'Ruled out', 'Chronic'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'diagnosis', option_key: 'status', option_value: v, sort_order: i + 1, is_active: true,
-      })),
+      dd('diagnosis', 'status', 'Confirmed', 'पुष्टि', 'निश्चित', 0),
+      dd('diagnosis', 'status', 'Suspected', 'संदिग्ध', 'संशयित', 1),
+      dd('diagnosis', 'status', 'Provisional', 'अनंतिम', 'तात्पुरता', 2),
+      dd('diagnosis', 'status', 'Ruled out', 'खारिज', 'नाकारलेला', 3),
+      dd('diagnosis', 'status', 'Chronic', 'दीर्घकालिक', 'जुनाट', 4),
+
       // Lab Results - interpretation (4)  IDs 61-64
-      ...['Normal', 'Abnormal', 'Critical', 'Borderline'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'labresult', option_key: 'interpretation', option_value: v, sort_order: i + 1, is_active: true,
-      })),
-      // Lab Results - unit (10)  IDs 65-74
-      ...['mg/dL', 'g/dL', 'mmol/L', 'mEq/L', 'IU/L', 'U/L', 'cells/mcL', '%', 'mm/hr', 'ng/mL'].map((v, i) => ({
-        dropdown_option_id: dropdownId++, section: 'labresult', option_key: 'unit', option_value: v, sort_order: i + 1, is_active: true,
-      })),
+      dd('labresult', 'interpretation', 'Normal', 'सामान्य', 'सामान्य', 0),
+      dd('labresult', 'interpretation', 'Abnormal', 'असामान्य', 'असामान्य', 1),
+      dd('labresult', 'interpretation', 'Critical', 'गंभीर', 'गंभीर', 2),
+      dd('labresult', 'interpretation', 'Borderline', 'सीमावर्ती', 'सीमारेषेवर', 3),
+
+      // Lab Results - unit (10)  IDs 65-74 — units are universal, keep same
+      dd('labresult', 'unit', 'mg/dL', 'mg/dL', 'mg/dL', 0),
+      dd('labresult', 'unit', 'g/dL', 'g/dL', 'g/dL', 1),
+      dd('labresult', 'unit', 'mmol/L', 'mmol/L', 'mmol/L', 2),
+      dd('labresult', 'unit', 'mEq/L', 'mEq/L', 'mEq/L', 3),
+      dd('labresult', 'unit', 'IU/L', 'IU/L', 'IU/L', 4),
+      dd('labresult', 'unit', 'U/L', 'U/L', 'U/L', 5),
+      dd('labresult', 'unit', 'cells/mcL', 'cells/mcL', 'cells/mcL', 6),
+      dd('labresult', 'unit', '%', '%', '%', 7),
+      dd('labresult', 'unit', 'mm/hr', 'mm/hr', 'mm/hr', 8),
+      dd('labresult', 'unit', 'ng/mL', 'ng/mL', 'ng/mL', 9),
     ];
     await DropdownOption.insertMany(dropdownOptions);
     console.log(`Created ${dropdownOptions.length} dropdown options`);

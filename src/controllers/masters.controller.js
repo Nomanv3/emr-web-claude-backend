@@ -142,3 +142,92 @@ export const getSalutations = async (req, res, next) => {
     next(error);
   }
 };
+
+// ─── Bulk Import ────────────────────────────────────────────────────
+
+const BULK_IMPORT_TYPE_MAP = {
+  medication: { model: MasterMedication, required: ['brandName'] },
+  diagnosis: { model: MasterDiagnosis, required: ['icdCode', 'description'] },
+  symptom: { model: MasterSymptom, required: ['name'] },
+  examination_finding: { model: MasterExaminationFinding, required: ['name'] },
+  lab_test: { model: MasterLabTest, required: ['name'] },
+  lab_result: { model: MasterLabTest, required: ['name'] },
+};
+
+export const bulkImport = async (req, res, next) => {
+  try {
+    const { type, items } = req.body;
+
+    if (!type || !BULK_IMPORT_TYPE_MAP[type]) {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: `Invalid type. Must be one of: ${Object.keys(BULK_IMPORT_TYPE_MAP).join(', ')}`,
+        },
+      });
+    }
+
+    if (!Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: 'items must be a non-empty array',
+        },
+      });
+    }
+
+    const { model: Model, required: requiredFields } = BULK_IMPORT_TYPE_MAP[type];
+
+    const validItems = [];
+    const errors = [];
+
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const missingFields = requiredFields.filter(f => !item[f] || (typeof item[f] === 'string' && item[f].trim() === ''));
+      if (missingFields.length > 0) {
+        errors.push({ index: i, error: `Missing required fields: ${missingFields.join(', ')}` });
+      } else {
+        validItems.push({ ...item, _originalIndex: i });
+      }
+    }
+
+    let inserted = 0;
+
+    if (validItems.length > 0) {
+      const docsToInsert = validItems.map(({ _originalIndex, ...rest }) => rest);
+
+      try {
+        const result = await Model.insertMany(docsToInsert, { ordered: false });
+        inserted = result.length;
+      } catch (err) {
+        if (err.code === 11000 || (err.writeErrors && err.writeErrors.length > 0)) {
+          inserted = err.insertedDocs?.length ?? (validItems.length - (err.writeErrors?.length ?? 0));
+          if (inserted < 0) inserted = 0;
+
+          for (const writeErr of (err.writeErrors || [])) {
+            const validIdx = writeErr.index;
+            const originalIdx = validItems[validIdx]?._originalIndex ?? validIdx;
+            const msg = writeErr.errmsg?.includes('duplicate key')
+              ? 'Duplicate entry'
+              : (writeErr.errmsg || 'Insert failed');
+            errors.push({ index: originalIdx, error: msg });
+          }
+        } else {
+          throw err;
+        }
+      }
+    }
+
+    const failed = items.length - inserted;
+
+    res.json({
+      success: true,
+      data: { inserted, failed, errors },
+      message: `Bulk import completed: ${inserted} inserted, ${failed} failed`,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

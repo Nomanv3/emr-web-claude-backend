@@ -41,6 +41,23 @@ export const savePrescription = async (req, res, next) => {
 
     await prescription.save();
 
+    // Upsert medical history for this patient
+    const patientIdForHistory = req.body.patient_id || req.body.patientId;
+    const medConditions = req.body.medicalConditions;
+    if (patientIdForHistory && Array.isArray(medConditions) && medConditions.length > 0) {
+      const conditions = medConditions.map(c => ({
+        name: c.name,
+        value: c.value,
+        since: c.since || '',
+        notes: c.notes || '',
+      }));
+      await PatientMedicalHistory.findOneAndUpdate(
+        { patientId: patientIdForHistory },
+        { patientId: patientIdForHistory, conditions, noHistory: req.body.noRelevantHistory || false, updatedBy: req.user?.userId },
+        { upsert: true, new: true },
+      );
+    }
+
     if (prescription.queueId) {
       await Queue.findOneAndUpdate(
         { queueId: prescription.queueId },
@@ -107,6 +124,23 @@ export const updatePrescription = async (req, res, next) => {
         success: false,
         error: { code: 'PRESCRIPTION_NOT_FOUND', message: 'Prescription not found' },
       });
+    }
+
+    // Upsert medical history for this patient
+    const patientIdForHistory = prescription.patientId;
+    const medConditions = req.body.medicalConditions;
+    if (patientIdForHistory && Array.isArray(medConditions) && medConditions.length > 0) {
+      const conditions = medConditions.map(c => ({
+        name: c.name,
+        value: c.value,
+        since: c.since || '',
+        notes: c.notes || '',
+      }));
+      await PatientMedicalHistory.findOneAndUpdate(
+        { patientId: patientIdForHistory },
+        { patientId: patientIdForHistory, conditions, noHistory: req.body.noRelevantHistory || false, updatedBy: req.user?.userId },
+        { upsert: true, new: true },
+      );
     }
 
     res.json({
@@ -196,6 +230,7 @@ export const getDropdownOptions = async (req, res, next) => {
         dropdown_option_id: opt.dropdown_option_id,
         option_value: opt.option_value,
         option_key: opt.option_key,
+        translations: opt.translations || { hi: '', mr: '' },
       });
     }
 
@@ -477,7 +512,7 @@ export const getPatientDetailHistory = async (req, res, next) => {
           ...patient,
         },
         lockedVitals: lastPrescription?.vitals || null,
-        medicalHistory: medicalHistory?.conditions || [],
+        medicalHistory: medicalHistory || null,
         lastVisitDate: lastPrescription?.visitDate || null,
       },
     });
