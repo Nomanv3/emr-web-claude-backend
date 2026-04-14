@@ -112,12 +112,17 @@ async function seed() {
     console.log('Created branches');
 
     // 3. Users
+    // Idempotent dev-doctor seed: upsert via findOneAndDelete + create so
+    // pre-save hash hook still fires. Re-running seed always yields a fresh
+    // bcrypt hash for `password123`.
+    await User.deleteOne({ username: 'dev-doctor' });
     await User.create({
       userId: DOCTOR_ID,
       organizationId: ORG_ID,
       branchId: BRANCH_MUMBAI_ID,
-      email: 'doctor@healthfirst.in',
-      passwordHash: 'doctor123',
+      username: 'dev-doctor',
+      email: 'dev-doctor@emr.local',
+      passwordHash: 'password123',
       role: 'doctor',
       name: 'Dr. Arjun Mehta',
       qualifications: 'MBBS, MD (General Medicine)',
@@ -129,6 +134,7 @@ async function seed() {
       userId: RECEPTIONIST_ID,
       organizationId: ORG_ID,
       branchId: BRANCH_MUMBAI_ID,
+      username: 'reception',
       email: 'reception@healthfirst.in',
       passwordHash: 'reception123',
       role: 'receptionist',
@@ -139,6 +145,7 @@ async function seed() {
       userId: ADMIN_ID,
       organizationId: ORG_ID,
       branchId: BRANCH_MUMBAI_ID,
+      username: 'admin',
       email: 'admin@healthfirst.in',
       passwordHash: 'admin123',
       role: 'admin',

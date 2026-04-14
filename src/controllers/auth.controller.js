@@ -5,9 +5,10 @@ import config from '../config/env.js';
 const generateTokens = (user) => {
   const payload = {
     userId: user.userId,
-    role: user.role,
     organizationId: user.organizationId,
     branchId: user.branchId,
+    role: user.role,
+    username: user.username,
   };
 
   const token = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpiresIn });
@@ -16,22 +17,44 @@ const generateTokens = (user) => {
   return { token, refreshToken };
 };
 
+const buildSafeUser = (user) => ({
+  userId: user.userId,
+  username: user.username,
+  name: user.name,
+  email: user.email,
+  role: user.role,
+  organizationId: user.organizationId,
+  branchId: user.branchId,
+  qualifications: user.qualifications,
+  registrationNumber: user.registrationNumber,
+  specialization: user.specialization,
+});
+
 export const login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    // Accept username (preferred) or email for back-compat.
+    const { username, email, password } = req.body;
+    const identifier = (username || email || '').toString().trim().toLowerCase();
 
-    if (!email || !password) {
+    if (!identifier || !password) {
       return res.status(400).json({
         success: false,
-        error: { code: 'VALIDATION_ERROR', message: 'Email and password are required' },
+        message: 'Username and password are required',
+        code: 'VALIDATION_ERROR',
       });
     }
 
-    const user = await User.findOne({ email: email.toLowerCase(), isActive: true });
+    // Lookup by username first, fall back to email.
+    let user = await User.findOne({ username: identifier, isActive: true });
+    if (!user) {
+      user = await User.findOne({ email: identifier, isActive: true });
+    }
+
     if (!user) {
       return res.status(401).json({
         success: false,
-        error: { code: 'INVALID_CREDENTIALS', message: 'Invalid email or password' },
+        message: 'Invalid username or password',
+        code: 'AUTH_INVALID',
       });
     }
 
@@ -39,30 +62,21 @@ export const login = async (req, res, next) => {
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        error: { code: 'INVALID_CREDENTIALS', message: 'Invalid email or password' },
+        message: 'Invalid username or password',
+        code: 'AUTH_INVALID',
       });
     }
 
     const { token, refreshToken } = generateTokens(user);
 
-    res.json({
+    return res.json({
       success: true,
       data: {
+        user: buildSafeUser(user),
         token,
         refreshToken,
-        expiresIn: 86400,
-        user: {
-          userId: user.userId,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          organizationId: user.organizationId,
-          branchId: user.branchId,
-          qualifications: user.qualifications,
-          registrationNumber: user.registrationNumber,
-          specialization: user.specialization,
-        },
       },
+      message: 'Login successful',
     });
   } catch (error) {
     next(error);
@@ -76,7 +90,8 @@ export const refresh = async (req, res, next) => {
     if (!refreshToken) {
       return res.status(400).json({
         success: false,
-        error: { code: 'VALIDATION_ERROR', message: 'Refresh token is required' },
+        message: 'Refresh token is required',
+        code: 'VALIDATION_ERROR',
       });
     }
 
@@ -86,25 +101,41 @@ export const refresh = async (req, res, next) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        error: { code: 'INVALID_TOKEN', message: 'Invalid refresh token' },
+        message: 'Invalid refresh token',
+        code: 'AUTH_INVALID',
       });
     }
 
     const token = jwt.sign(
-      { userId: user.userId, role: user.role, organizationId: user.organizationId, branchId: user.branchId },
+      {
+        userId: user.userId,
+        organizationId: user.organizationId,
+        branchId: user.branchId,
+        role: user.role,
+        username: user.username,
+      },
       config.jwtSecret,
       { expiresIn: config.jwtExpiresIn }
     );
 
-    res.json({
+    return res.json({
       success: true,
-      data: { token, expiresIn: 86400 },
+      data: { token },
+      message: 'Token refreshed',
     });
   } catch (error) {
-    if (error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError') {
+    if (error.name === 'TokenExpiredError') {
       return res.status(401).json({
         success: false,
-        error: { code: 'INVALID_TOKEN', message: 'Invalid or expired refresh token' },
+        message: 'Refresh token has expired',
+        code: 'AUTH_EXPIRED',
+      });
+    }
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid refresh token',
+        code: 'AUTH_INVALID',
       });
     }
     next(error);
@@ -120,17 +151,43 @@ export const logout = async (req, res) => {
 
 export const register = async (req, res, next) => {
   try {
-    const { email, password, name, role, organizationId, branchId, qualifications, registrationNumber, specialization } = req.body;
+    const {
+      username,
+      email,
+      password,
+      name,
+      role,
+      organizationId,
+      branchId,
+      qualifications,
+      registrationNumber,
+      specialization,
+    } = req.body;
 
-    const existingUser = await User.findOne({ email: email.toLowerCase() });
+    if (!username || !email || !password || !name || !role) {
+      return res.status(400).json({
+        success: false,
+        message: 'username, email, password, name, and role are required',
+        code: 'VALIDATION_ERROR',
+      });
+    }
+
+    const existingUser = await User.findOne({
+      $or: [
+        { username: username.toLowerCase() },
+        { email: email.toLowerCase() },
+      ],
+    });
     if (existingUser) {
       return res.status(409).json({
         success: false,
-        error: { code: 'DUPLICATE_EMAIL', message: 'Email already in use' },
+        message: 'Username or email already in use',
+        code: 'DUPLICATE_USER',
       });
     }
 
     const user = new User({
+      username,
       email,
       passwordHash: password,
       name,
@@ -146,7 +203,13 @@ export const register = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      data: { userId: user.userId, email: user.email, name: user.name, role: user.role },
+      data: {
+        userId: user.userId,
+        username: user.username,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      },
       message: 'User registered successfully',
     });
   } catch (error) {

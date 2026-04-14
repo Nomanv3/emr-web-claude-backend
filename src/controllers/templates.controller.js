@@ -99,6 +99,37 @@ export const getGlobalTemplates = async (req, res, next) => {
   }
 };
 
+// ─── Main templates handler (full-prescription templates) ───
+
+export const mainTemplateHandler = async (req, res, next) => {
+  try {
+    const { organization_id, branch_id, template_id } = req.query;
+
+    if (template_id) {
+      const template = await PrescriptionTemplate.findOne({
+        templateId: template_id,
+        type: 'main',
+      });
+      if (!template) {
+        return res.status(404).json({
+          success: false,
+          error: { code: 'TEMPLATE_NOT_FOUND', message: 'Template not found' },
+        });
+      }
+      return res.json({ success: true, data: template });
+    }
+
+    const filter = { type: 'main' };
+    if (organization_id) filter.organizationId = organization_id;
+    if (branch_id) filter.branchId = branch_id;
+
+    const templates = await PrescriptionTemplate.find(filter).sort({ name: 1 });
+    res.json({ success: true, data: templates });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // ─── Legacy template handlers (for frontend prescription-Templates routes) ───
 
 export const templateGetHandler = async (req, res, next) => {

@@ -8,7 +8,7 @@ const prescriptionTemplateSchema = new mongoose.Schema({
   doctorId: { type: String },
   type: {
     type: String,
-    enum: ['symptom', 'medication', 'labtest', 'labresult', 'diagnosis', 'examination', 'procedure', 'global'],
+    enum: ['symptom', 'medication', 'labtest', 'labresult', 'diagnosis', 'examination', 'procedure', 'global', 'main'],
     required: true,
   },
   name: { type: String, required: true },

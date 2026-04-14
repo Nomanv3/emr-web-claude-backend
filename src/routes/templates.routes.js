@@ -12,6 +12,7 @@ import {
   templatePostHandler,
   templateEditHandler,
   templateDeleteHandler,
+  mainTemplateHandler,
 } from '../controllers/templates.controller.js';
 
 const router = Router();
@@ -23,6 +24,7 @@ router.get('/template-gethandler', templateGetHandler);
 router.post('/template-posthandler', templatePostHandler);
 router.put('/template-edithandler', templateEditHandler);
 router.delete('/template-deletehandler', templateDeleteHandler);
+router.get('/main-template-handler', mainTemplateHandler);
 
 // Standard CRUD routes
 router.get('/global', getGlobalTemplates);

@@ -32,7 +32,7 @@ export const searchPatients = async (req, res, next) => {
 
 export const getPatients = async (req, res, next) => {
   try {
-    const { search, startDate, endDate, page = 1, limit = 50 } = req.query;
+    const { search, startDate, endDate, dateFrom, dateTo, page = 1, limit = 50 } = req.query;
     const organizationId = req.query.organizationId || req.user?.organizationId;
     const branchId = req.query.branchId || req.user?.branchId;
 
@@ -48,10 +48,17 @@ export const getPatients = async (req, res, next) => {
       ];
     }
 
-    if (startDate || endDate) {
+    const fromDate = dateFrom || startDate;
+    const toDate = dateTo || endDate;
+    if (fromDate || toDate) {
       filter.createdAt = {};
-      if (startDate) filter.createdAt.$gte = new Date(startDate);
-      if (endDate) filter.createdAt.$lte = new Date(endDate);
+      if (fromDate) filter.createdAt.$gte = new Date(fromDate);
+      if (toDate) {
+        // Set end of day for the toDate
+        const end = new Date(toDate);
+        end.setHours(23, 59, 59, 999);
+        filter.createdAt.$lte = end;
+      }
     }
 
     const skip = (parseInt(page) - 1) * parseInt(limit);
@@ -75,7 +82,10 @@ export const createPatient = async (req, res, next) => {
   try {
     const organizationId = req.body.organizationId || req.user?.organizationId;
     const branchId = req.body.branchId || req.user?.branchId;
-    const { phone } = req.body;
+    const { phone, medicalHistory } = req.body;
+
+    // Remove medicalHistory from body before creating patient (separate collection)
+    delete req.body.medicalHistory;
 
     // Inject org/branch into body so they get saved
     req.body.organizationId = organizationId;
@@ -99,6 +109,31 @@ export const createPatient = async (req, res, next) => {
     });
 
     await patient.save();
+
+    // Save medical history if provided
+    if (medicalHistory && !medicalHistory.noRelevantHistory && medicalHistory.conditions?.length > 0) {
+      await PatientMedicalHistory.findOneAndUpdate(
+        { patientId: patient.patientId },
+        {
+          patientId: patient.patientId,
+          conditions: medicalHistory.conditions,
+          noHistory: false,
+          updatedBy: req.user?.userId || 'system',
+        },
+        { upsert: true, new: true }
+      );
+    } else if (medicalHistory?.noRelevantHistory) {
+      await PatientMedicalHistory.findOneAndUpdate(
+        { patientId: patient.patientId },
+        {
+          patientId: patient.patientId,
+          conditions: [],
+          noHistory: true,
+          updatedBy: req.user?.userId || 'system',
+        },
+        { upsert: true, new: true }
+      );
+    }
 
     res.status(201).json({
       success: true,

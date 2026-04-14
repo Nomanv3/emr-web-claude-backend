@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   userId: { type: String, default: uuidv4, unique: true, index: true },
   organizationId: { type: String, required: true, index: true },
   branchId: { type: String, required: true },
+  username: { type: String, required: true, unique: true, index: true, trim: true, lowercase: true },
   email: { type: String, required: true, unique: true, index: true, trim: true, lowercase: true },
   passwordHash: { type: String, required: true },
   role: {
