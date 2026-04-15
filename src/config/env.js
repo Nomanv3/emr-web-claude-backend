@@ -7,4 +7,5 @@ export default {
   jwtRefreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '7d',
   corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:5173',
   nodeEnv: process.env.NODE_ENV || 'development',
+  googleApiKey: process.env.GOOGLE_API_KEY || '',
 };

@@ -4,20 +4,30 @@ import Invoice from '../models/Invoice.js';
 
 export const getQueue = async (req, res, next) => {
   try {
-    const { organizationId, branchId, date } = req.query;
+    const { organizationId, branchId, date, dateFrom, dateTo } = req.query;
 
-    if (!organizationId || !branchId || !date) {
+    if (!organizationId || !branchId) {
       return res.status(400).json({
         success: false,
-        error: { code: 'VALIDATION_ERROR', message: 'organizationId, branchId, and date are required' },
+        error: { code: 'VALIDATION_ERROR', message: 'organizationId and branchId are required' },
       });
     }
 
-    const queue = await Queue.find({
-      organizationId,
-      branchId,
-      queueDate: date,
-    }).sort({ tokenNumber: 1 });
+    if (!date && !(dateFrom && dateTo)) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'VALIDATION_ERROR', message: 'Either date, or both dateFrom and dateTo are required' },
+      });
+    }
+
+    const filter = { organizationId, branchId };
+    if (date) {
+      filter.queueDate = date;
+    } else {
+      filter.queueDate = { $gte: dateFrom, $lte: dateTo };
+    }
+
+    const queue = await Queue.find(filter).sort({ queueDate: 1, tokenNumber: 1 });
 
     res.json({
       success: true,

@@ -26,6 +26,7 @@ import mastersRoutes from './routes/masters.routes.js';
 import analyticsRoutes from './routes/analytics.routes.js';
 import scheduleRoutes from './routes/schedule.routes.js';
 import whatsappRoutes from './routes/whatsapp.routes.js';
+import placesRoutes from './routes/places.routes.js';
 
 const app = express();
 
@@ -83,6 +84,7 @@ app.use('/api/schedule', authenticate, scheduleRoutes);
 // WhatsApp (Gupshup) send + PDF upload — mounted at /api so the endpoints
 // resolve to /api/send-whatsapp and /api/upload-prescription-pdf.
 app.use('/api', authenticate, whatsappRoutes);
+app.use('/api/places', authenticate, placesRoutes);
 
 // Legacy route aliases (match existing frontend API calls).
 // All aliases are gated behind `authenticate` to mirror their underlying routes.

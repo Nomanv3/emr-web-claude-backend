@@ -78,11 +78,19 @@ export const validateGetFullPrescription = [
 ];
 
 // --- Queue validators ---
+const YMD = /^\d{4}-\d{2}-\d{2}$/;
 export const validateGetQueue = [
   query('organizationId').notEmpty().withMessage('organizationId is required'),
   query('branchId').notEmpty().withMessage('branchId is required'),
-  query('date').notEmpty().withMessage('date is required')
-    .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage('date must be YYYY-MM-DD format'),
+  query('date').optional().matches(YMD).withMessage('date must be YYYY-MM-DD format'),
+  query('dateFrom').optional().matches(YMD).withMessage('dateFrom must be YYYY-MM-DD format'),
+  query('dateTo').optional().matches(YMD).withMessage('dateTo must be YYYY-MM-DD format'),
+  query('date').custom((value, { req }) => {
+    if (!value && !(req.query.dateFrom && req.query.dateTo)) {
+      throw new Error('Either date, or both dateFrom and dateTo are required');
+    }
+    return true;
+  }),
 ];
 
 export const validateAddToQueue = [
