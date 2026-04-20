@@ -1,0 +1,175 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "availableCount": 16,
+      "date": "<scrubbed>",
+      "slots": [
+        {
+          "appointmentId": null,
+          "available": false,
+          "endTime": "09:30",
+          "isAvailable": false,
+          "isPast": true,
+          "startTime": "09:00",
+          "time": "09:00"
+        },
+        {
+          "appointmentId": null,
+          "available": false,
+          "endTime": "10:00",
+          "isAvailable": false,
+          "isPast": true,
+          "startTime": "09:30",
+          "time": "09:30"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "10:30",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "10:00",
+          "time": "10:00"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "11:00",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "10:30",
+          "time": "10:30"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "11:30",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "11:00",
+          "time": "11:00"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "12:00",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "11:30",
+          "time": "11:30"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "12:30",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "12:00",
+          "time": "12:00"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "13:00",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "12:30",
+          "time": "12:30"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "13:30",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "13:00",
+          "time": "13:00"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "14:00",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "13:30",
+          "time": "13:30"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "14:30",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "14:00",
+          "time": "14:00"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "15:00",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "14:30",
+          "time": "14:30"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "15:30",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "15:00",
+          "time": "15:00"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "16:00",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "15:30",
+          "time": "15:30"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "16:30",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "16:00",
+          "time": "16:00"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "17:00",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "16:30",
+          "time": "16:30"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "17:30",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "17:00",
+          "time": "17:00"
+        },
+        {
+          "appointmentId": null,
+          "available": true,
+          "endTime": "18:00",
+          "isAvailable": true,
+          "isPast": false,
+          "startTime": "17:30",
+          "time": "17:30"
+        }
+      ],
+      "totalSlots": 18
+    },
+    "success": true
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "status": 200,
+  "body": {
+    "message": "EMR Backend is running",
+    "success": true,
+    "timestamp": "<scrubbed>"
+  }
+}

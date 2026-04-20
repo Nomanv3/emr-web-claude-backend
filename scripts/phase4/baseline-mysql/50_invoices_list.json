@@ -1,0 +1,167 @@
+{
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "_id": "<scrubbed>",
+        "appointmentId": "c658db5c-969a-4dc4-a287-aacc666b1827",
+        "balanceDue": 0,
+        "createdAt": "<scrubbed>",
+        "discount": 0,
+        "invoiceId": "56fc0433-f527-4e96-b112-3b712a3d32d4",
+        "lineItems": [
+          {
+            "description": "General Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 500,
+            "unitPrice": 500
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 500,
+        "patientId": "48415280-ba5d-43cd-b12e-4ea202b1b4c5",
+        "status": "Paid",
+        "subtotal": 500,
+        "tax": 0,
+        "totalAmount": 500,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "_id": "<scrubbed>",
+        "appointmentId": "9bd0ead4-733b-4499-8c17-a83e834b897a",
+        "balanceDue": 0,
+        "createdAt": "<scrubbed>",
+        "discount": 0,
+        "invoiceId": "17831038-7569-4c11-990f-ccda9c8ae6d8",
+        "lineItems": [
+          {
+            "description": "General Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 500,
+            "unitPrice": 500
+          },
+          {
+            "description": "Lab Work",
+            "discount": 0,
+            "quantity": 1,
+            "total": 200,
+            "unitPrice": 200
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 700,
+        "patientId": "4e1456e2-5ac1-4d69-9c0e-9342f4f54be4",
+        "status": "Paid",
+        "subtotal": 700,
+        "tax": 0,
+        "totalAmount": 700,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "_id": "<scrubbed>",
+        "appointmentId": "29e1f000-6316-4a46-a470-0464f1770253",
+        "balanceDue": 0,
+        "createdAt": "<scrubbed>",
+        "discount": 0,
+        "invoiceId": "36e1e12f-67c3-43b5-8e16-b1cb338dc8fe",
+        "lineItems": [
+          {
+            "description": "ECG",
+            "discount": 0,
+            "quantity": 1,
+            "total": 300,
+            "unitPrice": 300
+          },
+          {
+            "description": "General Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 500,
+            "unitPrice": 500
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 800,
+        "patientId": "76c0e178-1a37-446c-9a0a-33cb2ad22f26",
+        "status": "Paid",
+        "subtotal": 800,
+        "tax": 0,
+        "totalAmount": 800,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "_id": "<scrubbed>",
+        "appointmentId": null,
+        "balanceDue": 700,
+        "createdAt": "<scrubbed>",
+        "discount": 100,
+        "invoiceId": "31a48c5e-c6fe-4b8f-8fd7-346da617bc2d",
+        "lineItems": [
+          {
+            "description": "ECG",
+            "discount": 0,
+            "quantity": 1,
+            "total": 300,
+            "unitPrice": 300
+          },
+          {
+            "description": "Lab Work",
+            "discount": 0,
+            "quantity": 1,
+            "total": 200,
+            "unitPrice": 200
+          },
+          {
+            "description": "Specialist Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 800,
+            "unitPrice": 800
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 500,
+        "patientId": "8dcaebd5-a689-4072-bcae-23ee0e9458c4",
+        "status": "Partial",
+        "subtotal": 1300,
+        "tax": 0,
+        "totalAmount": 1200,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "_id": "<scrubbed>",
+        "appointmentId": null,
+        "balanceDue": 1800,
+        "createdAt": "<scrubbed>",
+        "discount": 200,
+        "invoiceId": "f9a45684-6ea9-45ba-b056-d82991b1962d",
+        "lineItems": [
+          {
+            "description": "Health Check-up Package",
+            "discount": 0,
+            "quantity": 1,
+            "total": 2000,
+            "unitPrice": 2000
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 0,
+        "patientId": "bb5b1a02-c538-49d9-a691-f3e2a9338627",
+        "status": "Unpaid",
+        "subtotal": 2000,
+        "tax": 0,
+        "totalAmount": 1800,
+        "updatedAt": "<scrubbed>"
+      }
+    ],
+    "pagination": {
+      "limit": 20,
+      "page": 1,
+      "total": 5,
+      "totalPages": 1
+    },
+    "success": true
+  }
+}

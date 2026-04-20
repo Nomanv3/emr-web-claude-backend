@@ -1,0 +1,54 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "medications": [
+        {
+          "_id": "<scrubbed>",
+          "brandName": "Combiflam",
+          "createdAt": "<scrubbed>",
+          "form": "Tablet",
+          "genericName": "Ibuprofen + Paracetamol",
+          "manufacturer": "Sanofi",
+          "medicationId": "83e3866e-11e8-4ac7-9010-0d149fd6b4de",
+          "strength": "400mg+325mg",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "brandName": "Cremaffin",
+          "createdAt": "<scrubbed>",
+          "form": "Syrup",
+          "genericName": "Liquid Paraffin + Milk of Magnesia",
+          "manufacturer": "Abbott",
+          "medicationId": "295d1548-c037-43d2-ae6f-8fc0639a9b87",
+          "strength": "Various",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "brandName": "Crocin",
+          "createdAt": "<scrubbed>",
+          "form": "Tablet",
+          "genericName": "Paracetamol",
+          "manufacturer": "GSK",
+          "medicationId": "d4101914-9f27-4646-9e49-7e55d4eb2b74",
+          "strength": "500mg",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "brandName": "Dolo",
+          "createdAt": "<scrubbed>",
+          "form": "Tablet",
+          "genericName": "Paracetamol",
+          "manufacturer": "Micro Labs",
+          "medicationId": "bc226115-26a5-4612-bcf8-90a0c222bbde",
+          "strength": "650mg",
+          "updatedAt": "<scrubbed>"
+        }
+      ]
+    },
+    "success": true
+  }
+}

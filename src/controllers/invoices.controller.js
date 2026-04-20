@@ -1,21 +1,38 @@
-import Invoice from '../models/Invoice.js';
-import Payment from '../models/Payment.js';
-import Patient from '../models/Patient.js';
-import Organization from '../models/Organization.js';
-import Branch from '../models/Branch.js';
+import { query, withTransaction } from '../config/mysql.js';
+import { mapInvoiceRow } from '../db/mappers/invoice.mapper.js';
+import { mapPaymentRow } from '../db/mappers/payment.mapper.js';
+import { v4 as uuidv4 } from 'uuid';
+
+async function loadInvoiceMysql(invoiceId) {
+  const [[row]] = await query(
+    'SELECT * FROM invoice WHERE invoice_id = ? AND deleted_at IS NULL LIMIT 1',
+    [invoiceId]
+  );
+  if (!row) return null;
+  const [liRows] = await query(
+    'SELECT * FROM invoice_line_items WHERE invoice_id = ? ORDER BY sort_order, id',
+    [invoiceId]
+  );
+  return mapInvoiceRow(row, liRows);
+}
+
+function computeTotals({ lineItems = [], discount = 0, tax = 0, paidAmount = 0 }) {
+  const subtotal = lineItems.reduce((s, it) => s + (Number(it.total) || 0), 0);
+  const totalAmount = subtotal - Number(discount || 0) + Number(tax || 0);
+  const balanceDue = totalAmount - Number(paidAmount || 0);
+  return { subtotal, totalAmount, balanceDue };
+}
 
 export const getInvoice = async (req, res, next) => {
   try {
-    const invoice = await Invoice.findOne({ invoiceId: req.params.invoiceId });
-
+    const invoice = await loadInvoiceMysql(req.params.invoiceId);
     if (!invoice) {
       return res.status(404).json({
         success: false,
         error: { code: 'INVOICE_NOT_FOUND', message: 'Invoice not found' },
       });
     }
-
-    res.json({ success: true, data: invoice });
+    return res.json({ success: true, data: invoice });
   } catch (error) {
     next(error);
   }
@@ -23,21 +40,41 @@ export const getInvoice = async (req, res, next) => {
 
 export const createInvoice = async (req, res, next) => {
   try {
-    const { lineItems = [], discount = 0, tax = 0 } = req.body;
+    const b = req.body;
+    const { lineItems = [], discount = 0, tax = 0 } = b;
+    const { subtotal, totalAmount } = computeTotals({ lineItems, discount, tax });
 
-    const subtotal = lineItems.reduce((sum, item) => sum + (item.total || 0), 0);
-    const totalAmount = subtotal - discount + tax;
-
-    const invoice = new Invoice({
-      ...req.body,
-      subtotal,
-      totalAmount,
-      balanceDue: totalAmount,
+    const invoiceId = uuidv4();
+    await withTransaction(async (conn) => {
+      await conn.query(
+        `INSERT INTO invoice
+          (invoice_id, organization_id, patient_id, appointment_id,
+           subtotal, discount, tax, total_amount, paid_amount, balance_due, status)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          invoiceId,
+          b.organizationId,
+          b.patientId,
+          b.appointmentId || null,
+          subtotal,
+          Number(discount) || 0,
+          Number(tax) || 0,
+          totalAmount,
+          0,
+          totalAmount,
+          'Unpaid',
+        ]
+      );
+      for (let i = 0; i < lineItems.length; i++) {
+        const li = lineItems[i];
+        await conn.query(
+          'INSERT INTO invoice_line_items (invoice_id, description, quantity, unit_price, discount, total, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?)',
+          [invoiceId, li.description || null, Number(li.quantity) || 1, Number(li.unitPrice) || 0, Number(li.discount) || 0, Number(li.total) || 0, i]
+        );
+      }
     });
-
-    await invoice.save();
-
-    res.status(201).json({
+    const invoice = await loadInvoiceMysql(invoiceId);
+    return res.status(201).json({
       success: true,
       data: invoice,
       message: 'Invoice created successfully',
@@ -49,29 +86,67 @@ export const createInvoice = async (req, res, next) => {
 
 export const updateInvoice = async (req, res, next) => {
   try {
-    if (req.body.lineItems) {
-      const subtotal = req.body.lineItems.reduce((sum, item) => sum + (item.total || 0), 0);
-      req.body.subtotal = subtotal;
-      const discount = req.body.discount || 0;
-      const tax = req.body.tax || 0;
-      req.body.totalAmount = subtotal - discount + tax;
-      req.body.balanceDue = req.body.totalAmount - (req.body.paidAmount || 0);
-    }
+    const b = req.body;
 
-    const invoice = await Invoice.findOneAndUpdate(
-      { invoiceId: req.params.invoiceId },
-      { $set: req.body },
-      { new: true, runValidators: true }
+    const [[existing]] = await query(
+      'SELECT * FROM invoice WHERE invoice_id = ? LIMIT 1',
+      [req.params.invoiceId]
     );
-
-    if (!invoice) {
+    if (!existing) {
       return res.status(404).json({
         success: false,
         error: { code: 'INVOICE_NOT_FOUND', message: 'Invoice not found' },
       });
     }
 
-    res.json({
+    let subtotal = parseFloat(existing.subtotal);
+    let totalAmount = parseFloat(existing.total_amount);
+    let balanceDue = parseFloat(existing.balance_due);
+    let paidAmount = b.paidAmount != null ? Number(b.paidAmount) : parseFloat(existing.paid_amount);
+    const discount = b.discount != null ? Number(b.discount) : parseFloat(existing.discount);
+    const tax = b.tax != null ? Number(b.tax) : parseFloat(existing.tax);
+
+    if (Array.isArray(b.lineItems)) {
+      const r = computeTotals({ lineItems: b.lineItems, discount, tax, paidAmount });
+      subtotal = r.subtotal;
+      totalAmount = r.totalAmount;
+      balanceDue = r.balanceDue;
+    } else if (b.discount != null || b.tax != null || b.paidAmount != null) {
+      totalAmount = subtotal - discount + tax;
+      balanceDue = totalAmount - paidAmount;
+    }
+
+    await withTransaction(async (conn) => {
+      const sets = [];
+      const params = [];
+      const colMap = {
+        organizationId: 'organization_id', patientId: 'patient_id',
+        appointmentId: 'appointment_id', status: 'status',
+      };
+      for (const [k, col] of Object.entries(colMap)) {
+        if (b[k] !== undefined) { sets.push(`${col} = ?`); params.push(b[k]); }
+      }
+      sets.push('subtotal = ?', 'discount = ?', 'tax = ?', 'total_amount = ?', 'paid_amount = ?', 'balance_due = ?');
+      params.push(subtotal, discount, tax, totalAmount, paidAmount, balanceDue);
+      await conn.query(
+        `UPDATE invoice SET ${sets.join(', ')} WHERE invoice_id = ?`,
+        [...params, req.params.invoiceId]
+      );
+
+      if (Array.isArray(b.lineItems)) {
+        await conn.query('DELETE FROM invoice_line_items WHERE invoice_id = ?', [req.params.invoiceId]);
+        for (let i = 0; i < b.lineItems.length; i++) {
+          const li = b.lineItems[i];
+          await conn.query(
+            'INSERT INTO invoice_line_items (invoice_id, description, quantity, unit_price, discount, total, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [req.params.invoiceId, li.description || null, Number(li.quantity) || 1, Number(li.unitPrice) || 0, Number(li.discount) || 0, Number(li.total) || 0, i]
+          );
+        }
+      }
+    });
+
+    const invoice = await loadInvoiceMysql(req.params.invoiceId);
+    return res.json({
       success: true,
       data: invoice,
       message: 'Invoice updated successfully',
@@ -84,27 +159,47 @@ export const updateInvoice = async (req, res, next) => {
 export const getInvoicesList = async (req, res, next) => {
   try {
     const { organizationId, patientId, status, page = 1, limit = 50 } = req.query;
-
-    const filter = {};
-    if (organizationId) filter.organizationId = organizationId;
-    if (patientId) filter.patientId = patientId;
-    if (status) filter.status = status;
-
-    const skip = (parseInt(page) - 1) * parseInt(limit);
-    const [invoices, total] = await Promise.all([
-      Invoice.find(filter).sort({ createdAt: -1 }).skip(skip).limit(parseInt(limit)),
-      Invoice.countDocuments(filter),
-    ]);
-
     const parsedLimit = parseInt(limit);
-    res.json({
+    const parsedPage = parseInt(page);
+
+    const where = ['deleted_at IS NULL'];
+    const params = [];
+    if (organizationId) { where.push('organization_id = ?'); params.push(organizationId); }
+    if (patientId)      { where.push('patient_id = ?');      params.push(patientId); }
+    if (status)         { where.push('status = ?');          params.push(status); }
+    const whereSql = `WHERE ${where.join(' AND ')}`;
+    const offset = (parsedPage - 1) * parsedLimit;
+
+    const [rows] = await query(
+      `SELECT * FROM invoice ${whereSql} ORDER BY created_at DESC LIMIT ? OFFSET ?`,
+      [...params, parsedLimit, offset]
+    );
+    const [[{ total }]] = await query(`SELECT COUNT(*) AS total FROM invoice ${whereSql}`, params);
+
+    // Bulk-load line items
+    let invoices;
+    if (rows.length === 0) {
+      invoices = [];
+    } else {
+      const ids = rows.map((r) => r.invoice_id);
+      const ph = ids.map(() => '?').join(',');
+      const [liRows] = await query(
+        `SELECT * FROM invoice_line_items WHERE invoice_id IN (${ph}) ORDER BY sort_order, id`,
+        ids
+      );
+      const liMap = {};
+      for (const li of liRows) (liMap[li.invoice_id] ||= []).push(li);
+      invoices = rows.map((r) => mapInvoiceRow(r, liMap[r.invoice_id] || []));
+    }
+
+    return res.json({
       success: true,
       data: invoices,
       pagination: {
-        page: parseInt(page),
+        page: parsedPage,
         limit: parsedLimit,
-        total,
-        totalPages: Math.ceil(total / parsedLimit),
+        total: Number(total),
+        totalPages: Math.ceil(Number(total) / parsedLimit),
       },
     });
   } catch (error) {
@@ -114,64 +209,79 @@ export const getInvoicesList = async (req, res, next) => {
 
 export const getReceiptData = async (req, res, next) => {
   try {
-    const invoice = await Invoice.findOne({ invoiceId: req.params.invoiceId });
-
+    const invoice = await loadInvoiceMysql(req.params.invoiceId);
     if (!invoice) {
       return res.status(404).json({
         success: false,
         error: { code: 'INVOICE_NOT_FOUND', message: 'Invoice not found' },
       });
     }
+    const [[patientRow]] = await query(
+      'SELECT patient_id, uhid, name, phone, email FROM patient WHERE patient_id = ? LIMIT 1',
+      [invoice.patientId]
+    );
+    const [[orgRow]] = await query(
+      'SELECT name, address_street, address_city, address_state, address_country, address_pincode, phone, email, logo FROM organization WHERE organization_id = ? LIMIT 1',
+      [invoice.organizationId]
+    );
+    const [[branchRow]] = await query(
+      'SELECT name, address_street, address_city, address_state, address_country, address_pincode FROM branch WHERE organization_id = ? LIMIT 1',
+      [invoice.organizationId]
+    );
+    const [payRows] = await query(
+      'SELECT * FROM payment WHERE invoice_id = ? ORDER BY collected_at DESC',
+      [invoice.invoiceId]
+    );
+    const payments = payRows.map(mapPaymentRow);
 
-    const [payments, patient, organization, branch] = await Promise.all([
-      Payment.find({ invoiceId: invoice.invoiceId }).sort({ collectedAt: -1 }),
-      Patient.findOne({ patientId: invoice.patientId }),
-      Organization.findOne({ organizationId: invoice.organizationId }),
-      invoice.organizationId
-        ? Branch.findOne({ organizationId: invoice.organizationId }).limit(1)
-        : null,
-    ]);
+    const addrObj = (r) => r ? {
+      street: r.address_street || null,
+      city:   r.address_city || null,
+      state:  r.address_state || null,
+      country: r.address_country || null,
+      pincode: r.address_pincode || null,
+    } : null;
 
-    res.json({
+    return res.json({
       success: true,
       data: {
         invoice: {
-          invoiceId: invoice.invoiceId,
-          lineItems: invoice.lineItems,
-          subtotal: invoice.subtotal,
-          discount: invoice.discount,
-          tax: invoice.tax,
+          invoiceId:   invoice.invoiceId,
+          lineItems:   invoice.lineItems,
+          subtotal:    invoice.subtotal,
+          discount:    invoice.discount,
+          tax:         invoice.tax,
           totalAmount: invoice.totalAmount,
-          paidAmount: invoice.paidAmount,
-          balanceDue: invoice.balanceDue,
-          status: invoice.status,
-          createdAt: invoice.createdAt,
+          paidAmount:  invoice.paidAmount,
+          balanceDue:  invoice.balanceDue,
+          status:      invoice.status,
+          createdAt:   invoice.createdAt,
         },
-        patient: patient ? {
-          patientId: patient.patientId,
-          uhid: patient.uhid,
-          name: patient.name,
-          phone: patient.phone,
-          email: patient.email,
+        patient: patientRow ? {
+          patientId: patientRow.patient_id,
+          uhid:      patientRow.uhid,
+          name:      patientRow.name,
+          phone:     patientRow.phone,
+          email:     patientRow.email,
         } : null,
-        clinic: organization ? {
-          name: organization.name,
-          address: organization.address,
-          phone: organization.phone,
-          email: organization.email,
-          logo: organization.logo,
+        clinic: orgRow ? {
+          name:    orgRow.name,
+          address: addrObj(orgRow),
+          phone:   orgRow.phone,
+          email:   orgRow.email,
+          logo:    orgRow.logo,
         } : null,
-        branch: branch ? {
-          name: branch.name,
-          address: branch.address,
+        branch: branchRow ? {
+          name:    branchRow.name,
+          address: addrObj(branchRow),
         } : null,
-        payments: payments.map(p => ({
-          paymentId: p.paymentId,
-          amount: p.amount,
-          method: p.method,
+        payments: payments.map((p) => ({
+          paymentId:      p.paymentId,
+          amount:         p.amount,
+          method:         p.method,
           transactionRef: p.transactionRef,
-          collectedAt: p.collectedAt,
-          receiptId: p.receiptId,
+          collectedAt:    p.collectedAt,
+          receiptId:      p.receiptId,
         })),
       },
     });

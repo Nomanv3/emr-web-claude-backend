@@ -1,0 +1,154 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "services": [
+        {
+          "_id": "<scrubbed>",
+          "category": "Consultation",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 1000,
+          "description": "",
+          "isActive": true,
+          "name": "Emergency Consultation",
+          "organizationId": "org-001",
+          "serviceId": "07a5fbc5-6541-4061-a33f-54abd56880df",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Screening",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 50,
+          "description": "",
+          "isActive": true,
+          "name": "Blood Sugar Test",
+          "organizationId": "org-001",
+          "serviceId": "1a13af0c-cda7-4c85-9762-063746ebda30",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Consultation",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 800,
+          "description": "",
+          "isActive": true,
+          "name": "Specialist Consultation",
+          "organizationId": "org-001",
+          "serviceId": "3604ca6c-bef4-4739-904c-327f6b4067c1",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Consultation",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 300,
+          "description": "",
+          "isActive": true,
+          "name": "Follow Up Consultation",
+          "organizationId": "org-001",
+          "serviceId": "407e5f47-c330-4785-a7ea-2485757eaade",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Package",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 2000,
+          "description": "",
+          "isActive": true,
+          "name": "Health Check-up Package",
+          "organizationId": "org-001",
+          "serviceId": "48c3dc2e-235c-496d-8d72-3ab7ccd6e0de",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Diagnostics",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 200,
+          "description": "",
+          "isActive": true,
+          "name": "Lab Work",
+          "organizationId": "org-001",
+          "serviceId": "5d4e8bd8-d061-485c-94d5-85064d195535",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Procedure",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 100,
+          "description": "",
+          "isActive": true,
+          "name": "Injection Administration",
+          "organizationId": "org-001",
+          "serviceId": "669a22a5-34f3-4e71-aa14-c304c1ee4c5b",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Diagnostics",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 300,
+          "description": "",
+          "isActive": true,
+          "name": "ECG",
+          "organizationId": "org-001",
+          "serviceId": "66c89772-899f-4a3f-af14-2a5f6698f5e2",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Procedure",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 250,
+          "description": "",
+          "isActive": true,
+          "name": "Wound Dressing",
+          "organizationId": "org-001",
+          "serviceId": "6ac484eb-b9b9-4987-9a84-a2632a91b15a",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Screening",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 0,
+          "description": "",
+          "isActive": true,
+          "name": "Blood Pressure Check",
+          "organizationId": "org-001",
+          "serviceId": "76e91a97-f041-4ec7-991c-d3ff2685423d",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Procedure",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 200,
+          "description": "",
+          "isActive": true,
+          "name": "Nebulization",
+          "organizationId": "org-001",
+          "serviceId": "f1faf561-10a7-4be1-a3e9-6f038f871c75",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Consultation",
+          "createdAt": "<scrubbed>",
+          "defaultPrice": 500,
+          "description": "",
+          "isActive": true,
+          "name": "General Consultation",
+          "organizationId": "org-001",
+          "serviceId": "fba63b52-6215-475e-b844-826f0f4d5dc9",
+          "updatedAt": "<scrubbed>"
+        }
+      ]
+    },
+    "success": true
+  }
+}

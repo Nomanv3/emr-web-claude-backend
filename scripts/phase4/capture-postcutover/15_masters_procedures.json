@@ -1,0 +1,130 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "procedures": [
+        {
+          "_id": "<scrubbed>",
+          "category": "Diagnostic",
+          "createdAt": "<scrubbed>",
+          "name": "Blood Sample Collection",
+          "procedureId": "d96a0adc-09b0-4a6a-bd6b-bfdf46e0810e",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Procedure",
+          "createdAt": "<scrubbed>",
+          "name": "Catheterization",
+          "procedureId": "3f434c65-a1d1-4ef0-9cda-528167f84e31",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Minor",
+          "createdAt": "<scrubbed>",
+          "name": "Ear Syringing",
+          "procedureId": "b68b14d8-b57b-46ec-aa5c-2fe9fc1a7f44",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Diagnostic",
+          "createdAt": "<scrubbed>",
+          "name": "ECG Recording",
+          "procedureId": "800d1fea-2699-446c-b44d-f64c23041403",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Minor",
+          "createdAt": "<scrubbed>",
+          "name": "Foreign Body Removal (Ear)",
+          "procedureId": "55904475-a303-4836-9b32-6e0d63174eca",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Minor",
+          "createdAt": "<scrubbed>",
+          "name": "Foreign Body Removal (Eye)",
+          "procedureId": "046d8d45-fc50-40c5-8b6a-27b69a7c312f",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Administration",
+          "createdAt": "<scrubbed>",
+          "name": "IM Injection",
+          "procedureId": "b6afd19d-8f1e-4580-8e4c-a325433bac34",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Minor Surgery",
+          "createdAt": "<scrubbed>",
+          "name": "Incision & Drainage",
+          "procedureId": "72c0a481-f5d1-45cf-a00f-6dafd705c754",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Procedure",
+          "createdAt": "<scrubbed>",
+          "name": "IV Cannulation",
+          "procedureId": "f957e46f-978b-40f0-b369-8fed7fcaca15",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Administration",
+          "createdAt": "<scrubbed>",
+          "name": "IV Injection",
+          "procedureId": "c2c784cf-018d-4528-b5b6-d255015ea26f",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Therapeutic",
+          "createdAt": "<scrubbed>",
+          "name": "Nebulization",
+          "procedureId": "dd20834e-136e-4f87-829f-628b2d61f393",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Orthopedic",
+          "createdAt": "<scrubbed>",
+          "name": "Plaster Cast Application",
+          "procedureId": "91ac335e-a7ca-497f-8094-ebb8059e4df9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Orthopedic",
+          "createdAt": "<scrubbed>",
+          "name": "Splinting",
+          "procedureId": "0b796dea-6ac2-4b86-ae13-b6f355cdcbdc",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Minor Surgery",
+          "createdAt": "<scrubbed>",
+          "name": "Suturing",
+          "procedureId": "5ba82b75-1a2b-49bb-b2e0-320db6bc3658",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "category": "Minor",
+          "createdAt": "<scrubbed>",
+          "name": "Wound Dressing",
+          "procedureId": "5d4d7db8-3961-424c-9c81-0d4ba938e771",
+          "updatedAt": "<scrubbed>"
+        }
+      ]
+    },
+    "success": true
+  }
+}

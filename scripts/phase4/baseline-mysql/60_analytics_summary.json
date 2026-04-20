@@ -1,0 +1,66 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "appointments": {
+        "cancelled": 0,
+        "completed": 3,
+        "noShow": 0,
+        "scheduled": 4,
+        "total": 8
+      },
+      "dailyTrend": [
+        {
+          "appointments": 8,
+          "date": "<scrubbed>",
+          "newPatients": 25,
+          "revenue": 2500
+        }
+      ],
+      "patients": {
+        "newThisPeriod": 25,
+        "returningThisPeriod": 0,
+        "total": 25
+      },
+      "revenue": {
+        "byMethod": {
+          "card": 800,
+          "cash": 1000,
+          "online": 0,
+          "upi": 700
+        },
+        "collected": 2500,
+        "pending": 2500,
+        "total": 2500
+      },
+      "services": [
+        {
+          "count": 2,
+          "name": "ECG",
+          "revenue": 600
+        },
+        {
+          "count": 3,
+          "name": "General Consultation",
+          "revenue": 1500
+        },
+        {
+          "count": 1,
+          "name": "Health Check-up Package",
+          "revenue": 2000
+        },
+        {
+          "count": 2,
+          "name": "Lab Work",
+          "revenue": 400
+        },
+        {
+          "count": 1,
+          "name": "Specialist Consultation",
+          "revenue": 800
+        }
+      ]
+    },
+    "success": true
+  }
+}

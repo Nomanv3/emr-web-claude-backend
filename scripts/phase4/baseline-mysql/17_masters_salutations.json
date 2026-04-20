@@ -1,0 +1,52 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "salutations": [
+        {
+          "_id": "<scrubbed>",
+          "createdAt": "<scrubbed>",
+          "label": "Baby",
+          "salutationId": "ff888e49-140c-4bca-ba59-17cf82379bc9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "createdAt": "<scrubbed>",
+          "label": "Dr",
+          "salutationId": "de7a75a3-929b-4618-983a-e874b2d6a40c",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "createdAt": "<scrubbed>",
+          "label": "Master",
+          "salutationId": "6c514a01-0fe8-42f1-bbcf-943ec6b61703",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "createdAt": "<scrubbed>",
+          "label": "Mr",
+          "salutationId": "7a9626d0-f1c6-4d44-a444-9af85c0e9ac6",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "createdAt": "<scrubbed>",
+          "label": "Mrs",
+          "salutationId": "8db01caa-ef4d-4e41-94e1-7773422cc272",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "createdAt": "<scrubbed>",
+          "label": "Ms",
+          "salutationId": "78c10db2-51d2-4b73-9f60-89613eed17e1",
+          "updatedAt": "<scrubbed>"
+        }
+      ]
+    },
+    "success": true
+  }
+}

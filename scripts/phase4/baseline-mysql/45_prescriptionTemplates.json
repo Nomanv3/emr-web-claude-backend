@@ -1,0 +1,143 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "templates": [
+        {
+          "_id": "<scrubbed>",
+          "branchId": "branch-001",
+          "createdAt": "<scrubbed>",
+          "data": {
+            "items": [
+              {
+                "brand_name": "Ibuprofen 400mg",
+                "dosage_id": 6,
+                "duration_id": 28,
+                "frequency_id": 12,
+                "generic_name": "Ibuprofen",
+                "timing_id": 20,
+                "type": "Tablet"
+              },
+              {
+                "brand_name": "Paracetamol 500mg",
+                "dosage_id": 6,
+                "duration_id": 27,
+                "frequency_id": 12,
+                "generic_name": "Paracetamol",
+                "timing_id": 20,
+                "type": "Tablet"
+              }
+            ]
+          },
+          "doctorId": "dev-doctor-001",
+          "isGlobal": false,
+          "name": "Fever Treatment",
+          "organizationId": "org-001",
+          "templateId": "0a2d6cba-e4ea-4b96-ae63-08692dd164c8",
+          "type": "medication",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "branchId": "branch-001",
+          "createdAt": "<scrubbed>",
+          "data": {
+            "items": [
+              {
+                "codes": "J00",
+                "name": "Acute nasopharyngitis",
+                "status_id": 56
+              },
+              {
+                "codes": "J06.9",
+                "name": "Acute upper respiratory infection",
+                "status_id": 56
+              }
+            ]
+          },
+          "doctorId": "dev-doctor-001",
+          "isGlobal": false,
+          "name": "Respiratory Infection",
+          "organizationId": "org-001",
+          "templateId": "3a0c7717-0f70-466b-bd15-de76ac10e74c",
+          "type": "diagnosis",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "branchId": "branch-001",
+          "createdAt": "<scrubbed>",
+          "data": {
+            "items": [
+              {
+                "duration": "3 days",
+                "laterality_id": 55,
+                "name": "Runny nose",
+                "severity_id": 47
+              },
+              {
+                "duration": "3 days",
+                "laterality_id": 55,
+                "name": "Sneezing",
+                "severity_id": 47
+              },
+              {
+                "duration": "2 days",
+                "laterality_id": 55,
+                "name": "Sore throat",
+                "severity_id": 48
+              }
+            ]
+          },
+          "doctorId": "dev-doctor-001",
+          "isGlobal": false,
+          "name": "Common Cold Symptoms",
+          "organizationId": "org-001",
+          "templateId": "78740e07-49d8-4109-8ba5-2d4fe372d8d6",
+          "type": "symptom",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "_id": "<scrubbed>",
+          "branchId": "branch-001",
+          "createdAt": "<scrubbed>",
+          "data": {
+            "prescription_data": {
+              "patient_diagnoses": [
+                {
+                  "codes": "J06.9",
+                  "diagnosis_name": "Acute upper respiratory infection"
+                }
+              ],
+              "patient_medications": [
+                {
+                  "brand_name": "Paracetamol 500mg",
+                  "generic_name": "Paracetamol",
+                  "type": "Tablet"
+                }
+              ],
+              "patient_symptoms": [
+                {
+                  "duration": "3 days",
+                  "symptom_name": "Runny nose"
+                },
+                {
+                  "duration": "3 days",
+                  "symptom_name": "Sneezing"
+                }
+              ]
+            }
+          },
+          "doctorId": "dev-doctor-001",
+          "isGlobal": true,
+          "name": "Common Cold Protocol",
+          "organizationId": "org-001",
+          "templateId": "bd361c2f-faf1-4dc9-b4e9-8ee2fe98b60d",
+          "type": "global",
+          "updatedAt": "<scrubbed>"
+        }
+      ]
+    },
+    "success": true
+  }
+}

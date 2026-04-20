@@ -1,0 +1,66 @@
+{
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "_id": "<scrubbed>",
+        "amount": 700,
+        "collectedAt": "2026-04-17T12:12:25.000Z",
+        "collectedBy": "dev-receptionist-001",
+        "createdAt": "<scrubbed>",
+        "invoiceId": "17831038-7569-4c11-990f-ccda9c8ae6d8",
+        "method": "UPI",
+        "paymentId": "6c3da7c1-4d50-4619-82ae-45c936f1d5d0",
+        "receiptId": "2ef5ec5e-3fd3-4306-ab90-f49af2b9846b",
+        "transactionRef": "UPI-TXN-20260302-001",
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "_id": "<scrubbed>",
+        "amount": 500,
+        "collectedAt": "2026-04-17T12:12:25.000Z",
+        "collectedBy": "dev-receptionist-001",
+        "createdAt": "<scrubbed>",
+        "invoiceId": "31a48c5e-c6fe-4b8f-8fd7-346da617bc2d",
+        "method": "Cash",
+        "paymentId": "97fd2bd6-98cb-4b14-9a63-acc3482453ab",
+        "receiptId": "9e469a9a-0e5d-49be-850f-7f449b21556a",
+        "transactionRef": null,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "_id": "<scrubbed>",
+        "amount": 800,
+        "collectedAt": "2026-04-17T12:12:25.000Z",
+        "collectedBy": "dev-receptionist-001",
+        "createdAt": "<scrubbed>",
+        "invoiceId": "36e1e12f-67c3-43b5-8e16-b1cb338dc8fe",
+        "method": "Card",
+        "paymentId": "0283d4e9-4fac-41c6-b6b6-5ee487b4bdf0",
+        "receiptId": "e3392a2a-800d-4e73-a604-66c190f976c2",
+        "transactionRef": "CARD-TXN-20260302-001",
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "_id": "<scrubbed>",
+        "amount": 500,
+        "collectedAt": "2026-04-17T12:12:25.000Z",
+        "collectedBy": "dev-receptionist-001",
+        "createdAt": "<scrubbed>",
+        "invoiceId": "56fc0433-f527-4e96-b112-3b712a3d32d4",
+        "method": "Cash",
+        "paymentId": "2356f942-6e30-4088-93a0-b0f40b11dfee",
+        "receiptId": "36bdcdde-28cb-4ba0-8ea1-625e27680a8d",
+        "transactionRef": null,
+        "updatedAt": "<scrubbed>"
+      }
+    ],
+    "pagination": {
+      "limit": 20,
+      "page": 1,
+      "total": 4,
+      "totalPages": 1
+    },
+    "success": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "_id": "<scrubbed>",
+      "address": {
+        "city": "Mumbai",
+        "country": "India",
+        "pincode": "400049",
+        "state": "Maharashtra",
+        "street": "12 Juhu Tara Road"
+      },
+      "age": 37,
+      "alternatePhone": null,
+      "bloodGroup": "A+",
+      "branchId": "branch-001",
+      "createdAt": "<scrubbed>",
+      "createdBy": "dev-receptionist-001",
+      "dateOfBirth": "1988-07-08T00:00:00.000Z",
+      "email": "kavita.nair@email.com",
+      "gender": "F",
+      "isActive": true,
+      "medicalHistory": null,
+      "name": "Kavita Nair",
+      "organizationId": "org-001",
+      "patientId": "213b0341-1a8e-4a65-9abc-367bfb28cff9",
+      "phone": "9876543219",
+      "salutation": "Mrs",
+      "tags": [],
+      "uhid": "UHID00010",
+      "updatedAt": "<scrubbed>"
+    },
+    "success": true
+  }
+}

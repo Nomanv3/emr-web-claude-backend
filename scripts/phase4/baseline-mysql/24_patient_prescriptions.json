@@ -1,0 +1,10 @@
+{
+  "status": 404,
+  "body": {
+    "error": {
+      "code": "NOT_FOUND",
+      "message": "Route GET /api/prescriptions not found"
+    },
+    "success": false
+  }
+}

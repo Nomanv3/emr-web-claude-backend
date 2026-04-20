@@ -1,0 +1,147 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "templates": [
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "branchId": "branch-001",
+          "createdAt": "<scrubbed>",
+          "data": {
+            "items": [
+              {
+                "codes": "J00",
+                "name": "Acute nasopharyngitis",
+                "status_id": 56
+              },
+              {
+                "codes": "J06.9",
+                "name": "Acute upper respiratory infection",
+                "status_id": 56
+              }
+            ]
+          },
+          "doctorId": "dev-doctor-001",
+          "isGlobal": false,
+          "name": "Respiratory Infection",
+          "organizationId": "org-001",
+          "templateId": "55e3b5c4-e06b-4eac-bc73-70cea19e5436",
+          "type": "diagnosis",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "branchId": "branch-001",
+          "createdAt": "<scrubbed>",
+          "data": {
+            "items": [
+              {
+                "duration": "3 days",
+                "laterality_id": 55,
+                "name": "Runny nose",
+                "severity_id": 47
+              },
+              {
+                "duration": "3 days",
+                "laterality_id": 55,
+                "name": "Sneezing",
+                "severity_id": 47
+              },
+              {
+                "duration": "2 days",
+                "laterality_id": 55,
+                "name": "Sore throat",
+                "severity_id": 48
+              }
+            ]
+          },
+          "doctorId": "dev-doctor-001",
+          "isGlobal": false,
+          "name": "Common Cold Symptoms",
+          "organizationId": "org-001",
+          "templateId": "6ed3eb8c-b303-4f29-85f0-be49c00ec449",
+          "type": "symptom",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "branchId": "branch-001",
+          "createdAt": "<scrubbed>",
+          "data": {
+            "items": [
+              {
+                "brand_name": "Ibuprofen 400mg",
+                "dosage_id": 6,
+                "duration_id": 28,
+                "frequency_id": 12,
+                "generic_name": "Ibuprofen",
+                "timing_id": 20,
+                "type": "Tablet"
+              },
+              {
+                "brand_name": "Paracetamol 500mg",
+                "dosage_id": 6,
+                "duration_id": 27,
+                "frequency_id": 12,
+                "generic_name": "Paracetamol",
+                "timing_id": 20,
+                "type": "Tablet"
+              }
+            ]
+          },
+          "doctorId": "dev-doctor-001",
+          "isGlobal": false,
+          "name": "Fever Treatment",
+          "organizationId": "org-001",
+          "templateId": "c4dbffd7-77c1-4da3-afed-6422ac9476d7",
+          "type": "medication",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "branchId": "branch-001",
+          "createdAt": "<scrubbed>",
+          "data": {
+            "prescription_data": {
+              "patient_diagnoses": [
+                {
+                  "codes": "J06.9",
+                  "diagnosis_name": "Acute upper respiratory infection"
+                }
+              ],
+              "patient_medications": [
+                {
+                  "brand_name": "Paracetamol 500mg",
+                  "generic_name": "Paracetamol",
+                  "type": "Tablet"
+                }
+              ],
+              "patient_symptoms": [
+                {
+                  "duration": "3 days",
+                  "symptom_name": "Runny nose"
+                },
+                {
+                  "duration": "3 days",
+                  "symptom_name": "Sneezing"
+                }
+              ]
+            }
+          },
+          "doctorId": "dev-doctor-001",
+          "isGlobal": true,
+          "name": "Common Cold Protocol",
+          "organizationId": "org-001",
+          "templateId": "de943ff9-7752-4c1f-b887-561f396bf67d",
+          "type": "global",
+          "updatedAt": "<scrubbed>"
+        }
+      ]
+    },
+    "success": true
+  }
+}

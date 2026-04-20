@@ -1,6 +1,9 @@
-import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
 import config from '../config/env.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import { v4 as uuidv4 } from 'uuid';
+import { query, execute } from '../config/mysql.js';
+import { mapUserRow, mapUserRowWithHash } from '../db/mappers/user.mapper.js';
 
 const generateTokens = (user) => {
   const payload = {
@@ -45,12 +48,17 @@ export const login = async (req, res, next) => {
     }
 
     // Lookup by username first, fall back to email.
-    let user = await User.findOne({ username: identifier, isActive: true });
-    if (!user) {
-      user = await User.findOne({ email: identifier, isActive: true });
+    let [rows] = await query(
+      'SELECT * FROM `user` WHERE username = ? AND is_active = 1 LIMIT 1',
+      [identifier]
+    );
+    if (!rows.length) {
+      [rows] = await query(
+        'SELECT * FROM `user` WHERE email = ? AND is_active = 1 LIMIT 1',
+        [identifier]
+      );
     }
-
-    if (!user) {
+    if (!rows.length) {
       return res.status(401).json({
         success: false,
         message: 'Invalid username or password',
@@ -58,7 +66,8 @@ export const login = async (req, res, next) => {
       });
     }
 
-    const isMatch = await user.comparePassword(password);
+    const userWithHash = mapUserRowWithHash(rows[0]);
+    const isMatch = await bcrypt.compare(password, userWithHash.passwordHash);
     if (!isMatch) {
       return res.status(401).json({
         success: false,
@@ -67,17 +76,14 @@ export const login = async (req, res, next) => {
       });
     }
 
-    const { token, refreshToken } = generateTokens(user);
-
+    const safeUser = mapUserRow(rows[0]);
+    const { token, refreshToken } = generateTokens(safeUser);
     return res.json({
       success: true,
-      data: {
-        user: buildSafeUser(user),
-        token,
-        refreshToken,
-      },
+      data: { user: buildSafeUser(safeUser), token, refreshToken },
       message: 'Login successful',
     });
+
   } catch (error) {
     next(error);
   }
@@ -96,9 +102,12 @@ export const refresh = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(refreshToken, config.jwtRefreshSecret);
-    const user = await User.findOne({ userId: decoded.userId, isActive: true });
 
-    if (!user) {
+    const [[row]] = await query(
+      'SELECT * FROM `user` WHERE user_id = ? AND is_active = 1 LIMIT 1',
+      [decoded.userId]
+    );
+    if (!row) {
       return res.status(401).json({
         success: false,
         message: 'Invalid refresh token',
@@ -106,6 +115,7 @@ export const refresh = async (req, res, next) => {
       });
     }
 
+    const user = mapUserRow(row);
     const token = jwt.sign(
       {
         userId: user.userId,
@@ -117,12 +127,8 @@ export const refresh = async (req, res, next) => {
       config.jwtSecret,
       { expiresIn: config.jwtExpiresIn }
     );
+    return res.json({ success: true, data: { token }, message: 'Token refreshed' });
 
-    return res.json({
-      success: true,
-      data: { token },
-      message: 'Token refreshed',
-    });
   } catch (error) {
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({
@@ -172,13 +178,15 @@ export const register = async (req, res, next) => {
       });
     }
 
-    const existingUser = await User.findOne({
-      $or: [
-        { username: username.toLowerCase() },
-        { email: email.toLowerCase() },
-      ],
-    });
-    if (existingUser) {
+    const uLower = username.toLowerCase();
+    const eLower = email.toLowerCase();
+
+    // Duplicate check.
+    const [[existing]] = await query(
+      'SELECT user_id FROM `user` WHERE username = ? OR email = ? LIMIT 1',
+      [uLower, eLower]
+    );
+    if (existing) {
       return res.status(409).json({
         success: false,
         message: 'Username or email already in use',
@@ -186,32 +194,36 @@ export const register = async (req, res, next) => {
       });
     }
 
-    const user = new User({
-      username,
-      email,
-      passwordHash: password,
-      name,
-      role,
-      organizationId,
-      branchId,
-      qualifications,
-      registrationNumber,
-      specialization,
-    });
+    // Hash password (replicates Mongoose pre('save') hook).
+    const passwordHash = await bcrypt.hash(password, 10);
+    const userId = uuidv4();
 
-    await user.save();
+    await execute(
+      `INSERT INTO \`user\`
+         (user_id, organization_id, branch_id, username, email, password_hash,
+          role, name, qualifications, registration_number, specialization, is_active)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)`,
+      [
+        userId,
+        organizationId || null,
+        branchId || null,
+        uLower,
+        eLower,
+        passwordHash,
+        role,
+        name,
+        qualifications || null,
+        registrationNumber || null,
+        specialization || null,
+      ]
+    );
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
-      data: {
-        userId: user.userId,
-        username: user.username,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-      },
+      data: { userId, username: uLower, email: eLower, name, role },
       message: 'User registered successfully',
     });
+
   } catch (error) {
     next(error);
   }

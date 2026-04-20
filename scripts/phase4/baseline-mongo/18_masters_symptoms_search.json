@@ -1,0 +1,20 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "symptoms": [
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "General",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R50.9",
+          "name": "Fever",
+          "symptomId": "cf6b96c7-fa02-47ad-ade0-5c8dcd10a7d6",
+          "updatedAt": "<scrubbed>"
+        }
+      ]
+    },
+    "success": true
+  }
+}

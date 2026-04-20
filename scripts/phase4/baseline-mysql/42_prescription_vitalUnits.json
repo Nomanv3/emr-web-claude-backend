@@ -1,0 +1,95 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "units": {
+        "blood_pressure": [
+          {
+            "is_default": true,
+            "unit_id": 2,
+            "unit_name": "mmHg"
+          }
+        ],
+        "chest_circumference": [
+          {
+            "is_default": true,
+            "unit_id": 11,
+            "unit_name": "cm"
+          }
+        ],
+        "head_circumference": [
+          {
+            "is_default": true,
+            "unit_id": 10,
+            "unit_name": "cm"
+          }
+        ],
+        "height": [
+          {
+            "is_default": false,
+            "unit_id": 7,
+            "unit_name": "ft"
+          },
+          {
+            "is_default": true,
+            "unit_id": 6,
+            "unit_name": "cm"
+          }
+        ],
+        "mid_arm_circumference": [
+          {
+            "is_default": true,
+            "unit_id": 12,
+            "unit_name": "cm"
+          }
+        ],
+        "muscle_mass": [
+          {
+            "is_default": false,
+            "unit_id": 9,
+            "unit_name": "lbs"
+          },
+          {
+            "is_default": true,
+            "unit_id": 8,
+            "unit_name": "kg"
+          }
+        ],
+        "pulse": [
+          {
+            "is_default": true,
+            "unit_id": 1,
+            "unit_name": "bpm"
+          }
+        ],
+        "respiratory_rate": [
+          {
+            "is_default": true,
+            "unit_id": 3,
+            "unit_name": "breaths/min"
+          }
+        ],
+        "temperature": [
+          {
+            "is_default": false,
+            "unit_id": 5,
+            "unit_name": "°C"
+          },
+          {
+            "is_default": true,
+            "unit_id": 4,
+            "unit_name": "°F"
+          }
+        ],
+        "waist_circumference": [
+          {
+            "is_default": true,
+            "unit_id": 13,
+            "unit_name": "cm"
+          }
+        ]
+      }
+    },
+    "success": true
+  }
+}

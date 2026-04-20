@@ -1,0 +1,704 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "diagnosis": {
+        "status": [
+          {
+            "dropdown_option_id": 56,
+            "option_key": "status",
+            "option_value": "Confirmed",
+            "translations": {
+              "hi": "पुष्टि",
+              "mr": "निश्चित"
+            }
+          },
+          {
+            "dropdown_option_id": 57,
+            "option_key": "status",
+            "option_value": "Suspected",
+            "translations": {
+              "hi": "संदिग्ध",
+              "mr": "संशयित"
+            }
+          },
+          {
+            "dropdown_option_id": 58,
+            "option_key": "status",
+            "option_value": "Provisional",
+            "translations": {
+              "hi": "अनंतिम",
+              "mr": "तात्पुरता"
+            }
+          },
+          {
+            "dropdown_option_id": 59,
+            "option_key": "status",
+            "option_value": "Ruled out",
+            "translations": {
+              "hi": "खारिज",
+              "mr": "नाकारलेला"
+            }
+          },
+          {
+            "dropdown_option_id": 60,
+            "option_key": "status",
+            "option_value": "Chronic",
+            "translations": {
+              "hi": "दीर्घकालिक",
+              "mr": "जुनाट"
+            }
+          }
+        ]
+      },
+      "labresult": {
+        "interpretation": [
+          {
+            "dropdown_option_id": 61,
+            "option_key": "interpretation",
+            "option_value": "Normal",
+            "translations": {
+              "hi": "सामान्य",
+              "mr": "सामान्य"
+            }
+          },
+          {
+            "dropdown_option_id": 62,
+            "option_key": "interpretation",
+            "option_value": "Abnormal",
+            "translations": {
+              "hi": "असामान्य",
+              "mr": "असामान्य"
+            }
+          },
+          {
+            "dropdown_option_id": 63,
+            "option_key": "interpretation",
+            "option_value": "Critical",
+            "translations": {
+              "hi": "गंभीर",
+              "mr": "गंभीर"
+            }
+          },
+          {
+            "dropdown_option_id": 64,
+            "option_key": "interpretation",
+            "option_value": "Borderline",
+            "translations": {
+              "hi": "सीमावर्ती",
+              "mr": "सीमारेषेवर"
+            }
+          }
+        ],
+        "unit": [
+          {
+            "dropdown_option_id": 65,
+            "option_key": "unit",
+            "option_value": "mg/dL",
+            "translations": {
+              "hi": "mg/dL",
+              "mr": "mg/dL"
+            }
+          },
+          {
+            "dropdown_option_id": 66,
+            "option_key": "unit",
+            "option_value": "g/dL",
+            "translations": {
+              "hi": "g/dL",
+              "mr": "g/dL"
+            }
+          },
+          {
+            "dropdown_option_id": 67,
+            "option_key": "unit",
+            "option_value": "mmol/L",
+            "translations": {
+              "hi": "mmol/L",
+              "mr": "mmol/L"
+            }
+          },
+          {
+            "dropdown_option_id": 68,
+            "option_key": "unit",
+            "option_value": "mEq/L",
+            "translations": {
+              "hi": "mEq/L",
+              "mr": "mEq/L"
+            }
+          },
+          {
+            "dropdown_option_id": 69,
+            "option_key": "unit",
+            "option_value": "IU/L",
+            "translations": {
+              "hi": "IU/L",
+              "mr": "IU/L"
+            }
+          },
+          {
+            "dropdown_option_id": 70,
+            "option_key": "unit",
+            "option_value": "U/L",
+            "translations": {
+              "hi": "U/L",
+              "mr": "U/L"
+            }
+          },
+          {
+            "dropdown_option_id": 71,
+            "option_key": "unit",
+            "option_value": "cells/mcL",
+            "translations": {
+              "hi": "cells/mcL",
+              "mr": "cells/mcL"
+            }
+          },
+          {
+            "dropdown_option_id": 72,
+            "option_key": "unit",
+            "option_value": "%",
+            "translations": {
+              "hi": "%",
+              "mr": "%"
+            }
+          },
+          {
+            "dropdown_option_id": 73,
+            "option_key": "unit",
+            "option_value": "mm/hr",
+            "translations": {
+              "hi": "mm/hr",
+              "mr": "mm/hr"
+            }
+          },
+          {
+            "dropdown_option_id": 74,
+            "option_key": "unit",
+            "option_value": "ng/mL",
+            "translations": {
+              "hi": "ng/mL",
+              "mr": "ng/mL"
+            }
+          }
+        ]
+      },
+      "medication": {
+        "condition": [
+          {
+            "dropdown_option_id": 42,
+            "option_key": "condition",
+            "option_value": "If fever",
+            "translations": {
+              "hi": "बुखार होने पर",
+              "mr": "ताप आल्यास"
+            }
+          },
+          {
+            "dropdown_option_id": 43,
+            "option_key": "condition",
+            "option_value": "If pain",
+            "translations": {
+              "hi": "दर्द होने पर",
+              "mr": "वेदना झाल्यास"
+            }
+          },
+          {
+            "dropdown_option_id": 44,
+            "option_key": "condition",
+            "option_value": "If nausea",
+            "translations": {
+              "hi": "मतली होने पर",
+              "mr": "मळमळ झाल्यास"
+            }
+          },
+          {
+            "dropdown_option_id": 45,
+            "option_key": "condition",
+            "option_value": "If needed",
+            "translations": {
+              "hi": "आवश्यकता होने पर",
+              "mr": "गरज पडल्यास"
+            }
+          },
+          {
+            "dropdown_option_id": 46,
+            "option_key": "condition",
+            "option_value": "As required",
+            "translations": {
+              "hi": "आवश्यकतानुसार",
+              "mr": "गरजेनुसार"
+            }
+          }
+        ],
+        "dosage": [
+          {
+            "dropdown_option_id": 1,
+            "option_key": "dosage",
+            "option_value": "Once daily (OD)",
+            "translations": {
+              "hi": "दिन में एक बार (OD)",
+              "mr": "दिवसातून एकदा (OD)"
+            }
+          },
+          {
+            "dropdown_option_id": 10,
+            "option_key": "dosage",
+            "option_value": "As directed",
+            "translations": {
+              "hi": "निर्देशानुसार",
+              "mr": "निर्देशानुसार"
+            }
+          },
+          {
+            "dropdown_option_id": 2,
+            "option_key": "dosage",
+            "option_value": "Twice daily (BD)",
+            "translations": {
+              "hi": "दिन में दो बार (BD)",
+              "mr": "दिवसातून दोनदा (BD)"
+            }
+          },
+          {
+            "dropdown_option_id": 3,
+            "option_key": "dosage",
+            "option_value": "Thrice daily (TDS)",
+            "translations": {
+              "hi": "दिन में तीन बार (TDS)",
+              "mr": "दिवसातून तीनदा (TDS)"
+            }
+          },
+          {
+            "dropdown_option_id": 4,
+            "option_key": "dosage",
+            "option_value": "Four times daily (QID)",
+            "translations": {
+              "hi": "दिन में चार बार (QID)",
+              "mr": "दिवसातून चारदा (QID)"
+            }
+          },
+          {
+            "dropdown_option_id": 5,
+            "option_key": "dosage",
+            "option_value": "Half tablet",
+            "translations": {
+              "hi": "आधी गोली",
+              "mr": "अर्धी गोळी"
+            }
+          },
+          {
+            "dropdown_option_id": 6,
+            "option_key": "dosage",
+            "option_value": "One tablet",
+            "translations": {
+              "hi": "एक गोली",
+              "mr": "एक गोळी"
+            }
+          },
+          {
+            "dropdown_option_id": 7,
+            "option_key": "dosage",
+            "option_value": "Two tablets",
+            "translations": {
+              "hi": "दो गोलियाँ",
+              "mr": "दोन गोळ्या"
+            }
+          },
+          {
+            "dropdown_option_id": 8,
+            "option_key": "dosage",
+            "option_value": "5ml",
+            "translations": {
+              "hi": "५ मिली",
+              "mr": "५ मिली"
+            }
+          },
+          {
+            "dropdown_option_id": 9,
+            "option_key": "dosage",
+            "option_value": "10ml",
+            "translations": {
+              "hi": "१० मिली",
+              "mr": "१० मिली"
+            }
+          }
+        ],
+        "duration": [
+          {
+            "dropdown_option_id": 27,
+            "option_key": "duration",
+            "option_value": "3 days",
+            "translations": {
+              "hi": "३ दिन",
+              "mr": "३ दिवस"
+            }
+          },
+          {
+            "dropdown_option_id": 28,
+            "option_key": "duration",
+            "option_value": "5 days",
+            "translations": {
+              "hi": "५ दिन",
+              "mr": "५ दिवस"
+            }
+          },
+          {
+            "dropdown_option_id": 29,
+            "option_key": "duration",
+            "option_value": "7 days",
+            "translations": {
+              "hi": "७ दिन",
+              "mr": "७ दिवस"
+            }
+          },
+          {
+            "dropdown_option_id": 30,
+            "option_key": "duration",
+            "option_value": "10 days",
+            "translations": {
+              "hi": "१० दिन",
+              "mr": "१० दिवस"
+            }
+          },
+          {
+            "dropdown_option_id": 31,
+            "option_key": "duration",
+            "option_value": "14 days",
+            "translations": {
+              "hi": "१४ दिन",
+              "mr": "१४ दिवस"
+            }
+          },
+          {
+            "dropdown_option_id": 32,
+            "option_key": "duration",
+            "option_value": "1 month",
+            "translations": {
+              "hi": "१ महीना",
+              "mr": "१ महिना"
+            }
+          },
+          {
+            "dropdown_option_id": 33,
+            "option_key": "duration",
+            "option_value": "2 months",
+            "translations": {
+              "hi": "२ महीने",
+              "mr": "२ महिने"
+            }
+          },
+          {
+            "dropdown_option_id": 34,
+            "option_key": "duration",
+            "option_value": "3 months",
+            "translations": {
+              "hi": "३ महीने",
+              "mr": "३ महिने"
+            }
+          },
+          {
+            "dropdown_option_id": 35,
+            "option_key": "duration",
+            "option_value": "6 months",
+            "translations": {
+              "hi": "६ महीने",
+              "mr": "६ महिने"
+            }
+          },
+          {
+            "dropdown_option_id": 36,
+            "option_key": "duration",
+            "option_value": "Ongoing",
+            "translations": {
+              "hi": "जारी",
+              "mr": "चालू"
+            }
+          }
+        ],
+        "frequency": [
+          {
+            "dropdown_option_id": 11,
+            "option_key": "frequency",
+            "option_value": "Once a day",
+            "translations": {
+              "hi": "दिन में एक बार",
+              "mr": "दिवसातून एकदा"
+            }
+          },
+          {
+            "dropdown_option_id": 12,
+            "option_key": "frequency",
+            "option_value": "Twice a day",
+            "translations": {
+              "hi": "दिन में दो बार",
+              "mr": "दिवसातून दोनदा"
+            }
+          },
+          {
+            "dropdown_option_id": 13,
+            "option_key": "frequency",
+            "option_value": "Three times a day",
+            "translations": {
+              "hi": "दिन में तीन बार",
+              "mr": "दिवसातून तीन वेळा"
+            }
+          },
+          {
+            "dropdown_option_id": 14,
+            "option_key": "frequency",
+            "option_value": "Four times a day",
+            "translations": {
+              "hi": "दिन में चार बार",
+              "mr": "दिवसातून चार वेळा"
+            }
+          },
+          {
+            "dropdown_option_id": 15,
+            "option_key": "frequency",
+            "option_value": "Every 6 hours",
+            "translations": {
+              "hi": "हर ६ घंटे",
+              "mr": "दर ६ तासांनी"
+            }
+          },
+          {
+            "dropdown_option_id": 16,
+            "option_key": "frequency",
+            "option_value": "Every 8 hours",
+            "translations": {
+              "hi": "हर ८ घंटे",
+              "mr": "दर ८ तासांनी"
+            }
+          },
+          {
+            "dropdown_option_id": 17,
+            "option_key": "frequency",
+            "option_value": "Every 12 hours",
+            "translations": {
+              "hi": "हर १२ घंटे",
+              "mr": "दर १२ तासांनी"
+            }
+          },
+          {
+            "dropdown_option_id": 18,
+            "option_key": "frequency",
+            "option_value": "As needed (SOS)",
+            "translations": {
+              "hi": "आवश्यकतानुसार (SOS)",
+              "mr": "गरजेनुसार (SOS)"
+            }
+          }
+        ],
+        "start_from": [
+          {
+            "dropdown_option_id": 37,
+            "option_key": "start_from",
+            "option_value": "Today",
+            "translations": {
+              "hi": "आज से",
+              "mr": "आजपासून"
+            }
+          },
+          {
+            "dropdown_option_id": 38,
+            "option_key": "start_from",
+            "option_value": "Tomorrow",
+            "translations": {
+              "hi": "कल से",
+              "mr": "उद्यापासून"
+            }
+          },
+          {
+            "dropdown_option_id": 39,
+            "option_key": "start_from",
+            "option_value": "After 3 days",
+            "translations": {
+              "hi": "३ दिन बाद",
+              "mr": "३ दिवसांनंतर"
+            }
+          },
+          {
+            "dropdown_option_id": 40,
+            "option_key": "start_from",
+            "option_value": "After 1 week",
+            "translations": {
+              "hi": "१ सप्ताह बाद",
+              "mr": "१ आठवड्यानंतर"
+            }
+          },
+          {
+            "dropdown_option_id": 41,
+            "option_key": "start_from",
+            "option_value": "As advised",
+            "translations": {
+              "hi": "सलाह अनुसार",
+              "mr": "सल्ल्यानुसार"
+            }
+          }
+        ],
+        "timing": [
+          {
+            "dropdown_option_id": 19,
+            "option_key": "timing",
+            "option_value": "Before food",
+            "translations": {
+              "hi": "खाने से पहले",
+              "mr": "जेवणापूर्वी"
+            }
+          },
+          {
+            "dropdown_option_id": 20,
+            "option_key": "timing",
+            "option_value": "After food",
+            "translations": {
+              "hi": "खाने के बाद",
+              "mr": "जेवणानंतर"
+            }
+          },
+          {
+            "dropdown_option_id": 21,
+            "option_key": "timing",
+            "option_value": "With food",
+            "translations": {
+              "hi": "खाने के साथ",
+              "mr": "जेवणासोबत"
+            }
+          },
+          {
+            "dropdown_option_id": 22,
+            "option_key": "timing",
+            "option_value": "Empty stomach",
+            "translations": {
+              "hi": "खाली पेट",
+              "mr": "रिकाम्या पोटी"
+            }
+          },
+          {
+            "dropdown_option_id": 23,
+            "option_key": "timing",
+            "option_value": "Morning",
+            "translations": {
+              "hi": "सुबह",
+              "mr": "सकाळी"
+            }
+          },
+          {
+            "dropdown_option_id": 24,
+            "option_key": "timing",
+            "option_value": "Night",
+            "translations": {
+              "hi": "रात",
+              "mr": "रात्री"
+            }
+          },
+          {
+            "dropdown_option_id": 25,
+            "option_key": "timing",
+            "option_value": "Morning and Night",
+            "translations": {
+              "hi": "सुबह और रात",
+              "mr": "सकाळी आणि रात्री"
+            }
+          },
+          {
+            "dropdown_option_id": 26,
+            "option_key": "timing",
+            "option_value": "Bedtime",
+            "translations": {
+              "hi": "सोने से पहले",
+              "mr": "झोपण्यापूर्वी"
+            }
+          }
+        ]
+      },
+      "symptoms": {
+        "laterality": [
+          {
+            "dropdown_option_id": 52,
+            "option_key": "laterality",
+            "option_value": "Left",
+            "translations": {
+              "hi": "बायाँ",
+              "mr": "डावीकडे"
+            }
+          },
+          {
+            "dropdown_option_id": 53,
+            "option_key": "laterality",
+            "option_value": "Right",
+            "translations": {
+              "hi": "दायाँ",
+              "mr": "उजवीकडे"
+            }
+          },
+          {
+            "dropdown_option_id": 54,
+            "option_key": "laterality",
+            "option_value": "Bilateral",
+            "translations": {
+              "hi": "दोनों तरफ",
+              "mr": "दोन्ही बाजूंनी"
+            }
+          },
+          {
+            "dropdown_option_id": 55,
+            "option_key": "laterality",
+            "option_value": "Not applicable",
+            "translations": {
+              "hi": "लागू नहीं",
+              "mr": "लागू नाही"
+            }
+          }
+        ],
+        "severity": [
+          {
+            "dropdown_option_id": 47,
+            "option_key": "severity",
+            "option_value": "Mild",
+            "translations": {
+              "hi": "हल्का",
+              "mr": "सौम्य"
+            }
+          },
+          {
+            "dropdown_option_id": 48,
+            "option_key": "severity",
+            "option_value": "Moderate",
+            "translations": {
+              "hi": "मध्यम",
+              "mr": "मध्यम"
+            }
+          },
+          {
+            "dropdown_option_id": 49,
+            "option_key": "severity",
+            "option_value": "Severe",
+            "translations": {
+              "hi": "गंभीर",
+              "mr": "तीव्र"
+            }
+          },
+          {
+            "dropdown_option_id": 50,
+            "option_key": "severity",
+            "option_value": "Very Severe",
+            "translations": {
+              "hi": "अत्यंत गंभीर",
+              "mr": "अत्यंत तीव्र"
+            }
+          },
+          {
+            "dropdown_option_id": 51,
+            "option_key": "severity",
+            "option_value": "Critical",
+            "translations": {
+              "hi": "गंभीर स्थिति",
+              "mr": "गंभीर"
+            }
+          }
+        ]
+      }
+    },
+    "success": true
+  }
+}

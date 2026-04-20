@@ -1,0 +1,23 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "refreshToken": "<scrubbed>",
+      "token": "<scrubbed>",
+      "user": {
+        "branchId": "branch-001",
+        "email": "dev-doctor@emr.local",
+        "name": "Dr. Arjun Mehta",
+        "organizationId": "org-001",
+        "qualifications": "MBBS, MD (General Medicine)",
+        "registrationNumber": "MH-12345",
+        "role": "doctor",
+        "specialization": "General Medicine",
+        "userId": "dev-doctor-001",
+        "username": "dev-doctor"
+      }
+    },
+    "message": "Login successful",
+    "success": true
+  }
+}

@@ -1,175 +1,153 @@
-import Appointment from '../models/Appointment.js';
-import Patient from '../models/Patient.js';
-import Payment from '../models/Payment.js';
-import Invoice from '../models/Invoice.js';
-import Queue from '../models/Queue.js';
+import { query } from '../config/mysql.js';
 
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+function resolveRange(startDate, endDate) {
+  const start = startDate ? new Date(startDate) : new Date(Date.now() - 30 * 86400000);
+  const end = endDate ? new Date(endDate) : new Date();
+  end.setHours(23, 59, 59, 999);
+  return { start, end };
+}
+
+function scopedWhere(cols, { organizationId, branchId }) {
+  const where = [];
+  const params = [];
+  if (organizationId && cols.org) { where.push(`${cols.org} = ?`); params.push(organizationId); }
+  if (branchId && cols.branch)    { where.push(`${cols.branch} = ?`); params.push(branchId); }
+  return { where, params };
+}
+
+async function countAppt(where, params) {
+  const [rows] = await query(
+    `SELECT COUNT(*) AS c FROM appointment WHERE ${where.length ? where.join(' AND ') : '1=1'}`,
+    params,
+  );
+  return rows[0]?.c || 0;
+}
+
+// ─── 1. Analytics Summary ────────────────────────────────────────────────────
 export const getAnalyticsSummary = async (req, res, next) => {
   try {
     const { organizationId, branchId, startDate, endDate } = req.query;
+    const { start, end } = resolveRange(startDate, endDate);
 
-    const orgMatch = {};
-    if (organizationId) orgMatch.organizationId = organizationId;
-    if (branchId) orgMatch.branchId = branchId;
+    const apptBase = scopedWhere(
+      { org: 'organization_id', branch: 'branch_id' },
+      { organizationId, branchId },
+    );
+    const apptWhere = [...apptBase.where, 'created_at >= ?', 'created_at <= ?', 'deleted_at IS NULL'];
+    const apptParams = [...apptBase.params, start, end];
 
-    const start = startDate ? new Date(startDate) : new Date(new Date().setDate(new Date().getDate() - 30));
-    const end = endDate ? new Date(endDate) : new Date();
-    // Ensure end date includes the full day
-    end.setHours(23, 59, 59, 999);
-
-    const dateRange = { $gte: start, $lte: end };
-
-    // --- Appointments ---
-    const appointmentMatch = { ...orgMatch, createdAt: dateRange };
-    const [
-      totalAppointments,
-      scheduledAppointments,
-      completedAppointments,
-      cancelledAppointments,
-      noShowAppointments,
-    ] = await Promise.all([
-      Appointment.countDocuments(appointmentMatch),
-      Appointment.countDocuments({ ...appointmentMatch, status: 'Booked' }),
-      Appointment.countDocuments({ ...appointmentMatch, status: 'Completed' }),
-      Appointment.countDocuments({ ...appointmentMatch, status: 'Cancelled' }),
-      Appointment.countDocuments({ ...appointmentMatch, status: 'No Show' }),
+    const [totalAppointments, scheduledAppointments, completedAppointments, cancelledAppointments, noShowAppointments] = await Promise.all([
+      countAppt(apptWhere, apptParams),
+      countAppt([...apptWhere, 'status = ?'], [...apptParams, 'Booked']),
+      countAppt([...apptWhere, 'status = ?'], [...apptParams, 'Completed']),
+      countAppt([...apptWhere, 'status = ?'], [...apptParams, 'Cancelled']),
+      // No 'No Show' enum value in SQL schema — always 0 (parity with Mongo).
+      Promise.resolve(0),
     ]);
 
-    // --- Patients ---
-    const patientOrgMatch = {};
-    if (organizationId) patientOrgMatch.organizationId = organizationId;
-    if (branchId) patientOrgMatch.branchId = branchId;
+    // Patients
+    const patBase = scopedWhere({ org: 'organization_id', branch: 'branch_id' }, { organizationId, branchId });
+    const patWhere = [...patBase.where, 'is_active = 1'];
+    const [[totalRow]] = await query(
+      `SELECT COUNT(*) AS c FROM patient WHERE ${patWhere.join(' AND ')}`,
+      patBase.params,
+    );
+    const [[newRow]] = await query(
+      `SELECT COUNT(*) AS c FROM patient WHERE ${patWhere.join(' AND ')} AND created_at >= ? AND created_at <= ?`,
+      [...patBase.params, start, end],
+    );
+    const totalPatients = totalRow?.c || 0;
+    const newPatientsThisPeriod = newRow?.c || 0;
 
-    const [totalPatients, newPatientsThisPeriod] = await Promise.all([
-      Patient.countDocuments({ ...patientOrgMatch, isActive: true }),
-      Patient.countDocuments({ ...patientOrgMatch, isActive: true, createdAt: dateRange }),
-    ]);
+    // Returning: patients who had appointments in period AND registered before start.
+    const retWhere = ['a.created_at >= ?', 'a.created_at <= ?', 'a.deleted_at IS NULL'];
+    const retParams = [start, end];
+    if (organizationId) { retWhere.push('a.organization_id = ?'); retParams.push(organizationId); }
+    if (branchId)       { retWhere.push('a.branch_id = ?');       retParams.push(branchId); }
+    const [[retRow]] = await query(
+      `SELECT COUNT(DISTINCT a.patient_id) AS c
+       FROM appointment a
+       JOIN patient p ON p.patient_id = a.patient_id
+       WHERE ${retWhere.join(' AND ')} AND p.created_at < ?`,
+      [...retParams, start],
+    );
+    const returningThisPeriod = retRow?.c || 0;
 
-    // Returning patients: patients who had a prescription before the period AND during the period
-    const returningPatientsAgg = await Appointment.aggregate([
-      { $match: { ...orgMatch, createdAt: dateRange } },
-      { $group: { _id: '$patientId' } },
-      {
-        $lookup: {
-          from: 'patients',
-          let: { pid: '$_id' },
-          pipeline: [
-            { $match: { $expr: { $and: [{ $eq: ['$patientId', '$$pid'] }, { $lt: ['$createdAt', start] }] } } },
-            { $limit: 1 },
-          ],
-          as: 'existing',
-        },
-      },
-      { $match: { 'existing.0': { $exists: true } } },
-      { $count: 'count' },
-    ]);
-    const returningThisPeriod = returningPatientsAgg[0]?.count || 0;
-
-    // --- Revenue ---
-    const paymentDateMatch = { collectedAt: dateRange };
-    if (organizationId) paymentDateMatch.organizationId = organizationId;
-
-    const revenueAgg = await Payment.aggregate([
-      { $match: paymentDateMatch },
-      {
-        $group: {
-          _id: '$method',
-          total: { $sum: '$amount' },
-          count: { $sum: 1 },
-        },
-      },
-    ]);
-
+    // Revenue by method
+    const payWhere = ['collected_at >= ?', 'collected_at <= ?'];
+    const payParams = [start, end];
+    if (organizationId) {
+      payWhere.push('invoice_id IN (SELECT invoice_id FROM invoice WHERE organization_id = ?)');
+      payParams.push(organizationId);
+    }
+    const [revenueRows] = await query(
+      `SELECT method, SUM(amount) AS total, COUNT(*) AS count
+       FROM payment WHERE ${payWhere.join(' AND ')} GROUP BY method`,
+      payParams,
+    );
     const revenueByMethod = { Cash: 0, Card: 0, Online: 0, UPI: 0 };
     let totalRevenue = 0;
-    for (const entry of revenueAgg) {
-      if (entry._id && revenueByMethod.hasOwnProperty(entry._id)) {
-        revenueByMethod[entry._id] = entry.total;
-      }
-      totalRevenue += entry.total;
+    for (const r of revenueRows) {
+      const amt = Number(r.total) || 0;
+      if (r.method in revenueByMethod) revenueByMethod[r.method] = amt;
+      totalRevenue += amt;
     }
 
-    // Pending revenue from unpaid/partial invoices
-    const invoiceOrgMatch = {};
-    if (organizationId) invoiceOrgMatch.organizationId = organizationId;
+    // Pending invoices
+    const invBase = scopedWhere({ org: 'organization_id' }, { organizationId });
+    const invWhere = [...invBase.where, "status IN ('Unpaid','Partial')", 'created_at >= ?', 'created_at <= ?', 'deleted_at IS NULL'];
+    const [[pendRow]] = await query(
+      `SELECT COALESCE(SUM(balance_due), 0) AS pending FROM invoice WHERE ${invWhere.join(' AND ')}`,
+      [...invBase.params, start, end],
+    );
+    const pendingRevenue = Number(pendRow?.pending) || 0;
 
-    const pendingAgg = await Invoice.aggregate([
-      { $match: { ...invoiceOrgMatch, status: { $in: ['Unpaid', 'Partial'] }, createdAt: dateRange } },
-      { $group: { _id: null, pending: { $sum: '$balanceDue' } } },
-    ]);
-    const pendingRevenue = pendingAgg[0]?.pending || 0;
-
-    // --- Services (top services from invoices) ---
-    const serviceAgg = await Invoice.aggregate([
-      { $match: { ...invoiceOrgMatch, createdAt: dateRange } },
-      { $unwind: '$lineItems' },
-      {
-        $group: {
-          _id: '$lineItems.description',
-          count: { $sum: '$lineItems.quantity' },
-          revenue: { $sum: '$lineItems.total' },
-        },
-      },
-      { $sort: { count: -1 } },
-      { $limit: 20 },
-    ]);
-
-    const services = serviceAgg.map(s => ({
-      name: s._id || 'Unknown',
-      count: s.count,
-      revenue: s.revenue,
+    // Services (top)
+    const svcWhere = ['i.created_at >= ?', 'i.created_at <= ?', 'i.deleted_at IS NULL'];
+    const svcParams = [start, end];
+    if (organizationId) { svcWhere.push('i.organization_id = ?'); svcParams.push(organizationId); }
+    const [serviceRows] = await query(
+      `SELECT li.description AS name, SUM(li.quantity) AS count, SUM(li.total) AS revenue
+       FROM invoice_line_items li
+       JOIN invoice i ON i.invoice_id = li.invoice_id
+       WHERE ${svcWhere.join(' AND ')}
+       GROUP BY li.description
+       ORDER BY count DESC LIMIT 20`,
+      svcParams,
+    );
+    const services = serviceRows.map((r) => ({
+      name: r.name || 'Unknown',
+      count: Number(r.count) || 0,
+      revenue: Number(r.revenue) || 0,
     }));
 
-    // --- Daily Trend ---
-    const dailyAppointments = await Appointment.aggregate([
-      { $match: { ...orgMatch, createdAt: dateRange } },
-      {
-        $group: {
-          _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
-          appointments: { $sum: 1 },
-        },
-      },
-      { $sort: { _id: 1 } },
-    ]);
-
-    const dailyRevenue = await Payment.aggregate([
-      { $match: paymentDateMatch },
-      {
-        $group: {
-          _id: { $dateToString: { format: '%Y-%m-%d', date: '$collectedAt' } },
-          revenue: { $sum: '$amount' },
-        },
-      },
-      { $sort: { _id: 1 } },
-    ]);
-
-    const dailyNewPatients = await Patient.aggregate([
-      { $match: { ...patientOrgMatch, isActive: true, createdAt: dateRange } },
-      {
-        $group: {
-          _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
-          newPatients: { $sum: 1 },
-        },
-      },
-      { $sort: { _id: 1 } },
-    ]);
-
-    // Merge daily data
+    // Daily trends
+    const [dailyApptRows] = await query(
+      `SELECT DATE_FORMAT(created_at, '%Y-%m-%d') AS d, COUNT(*) AS c
+       FROM appointment WHERE ${apptWhere.join(' AND ')}
+       GROUP BY d ORDER BY d`,
+      apptParams,
+    );
+    const [dailyRevRows] = await query(
+      `SELECT DATE_FORMAT(collected_at, '%Y-%m-%d') AS d, SUM(amount) AS r
+       FROM payment WHERE ${payWhere.join(' AND ')} GROUP BY d ORDER BY d`,
+      payParams,
+    );
+    const [dailyPatRows] = await query(
+      `SELECT DATE_FORMAT(created_at, '%Y-%m-%d') AS d, COUNT(*) AS c
+       FROM patient WHERE ${patWhere.join(' AND ')} AND created_at >= ? AND created_at <= ?
+       GROUP BY d ORDER BY d`,
+      [...patBase.params, start, end],
+    );
     const dailyMap = {};
-    for (const d of dailyAppointments) {
-      dailyMap[d._id] = { date: d._id, appointments: d.appointments, revenue: 0, newPatients: 0 };
-    }
-    for (const d of dailyRevenue) {
-      if (!dailyMap[d._id]) dailyMap[d._id] = { date: d._id, appointments: 0, revenue: 0, newPatients: 0 };
-      dailyMap[d._id].revenue = d.revenue;
-    }
-    for (const d of dailyNewPatients) {
-      if (!dailyMap[d._id]) dailyMap[d._id] = { date: d._id, appointments: 0, revenue: 0, newPatients: 0 };
-      dailyMap[d._id].newPatients = d.newPatients;
-    }
+    const ensureDay = (d) => (dailyMap[d] ||= { date: d, appointments: 0, revenue: 0, newPatients: 0 });
+    for (const r of dailyApptRows) ensureDay(r.d).appointments = Number(r.c) || 0;
+    for (const r of dailyRevRows)  ensureDay(r.d).revenue      = Number(r.r) || 0;
+    for (const r of dailyPatRows)  ensureDay(r.d).newPatients  = Number(r.c) || 0;
     const dailyTrend = Object.values(dailyMap).sort((a, b) => a.date.localeCompare(b.date));
 
-    res.json({
+    return res.json({
       success: true,
       data: {
         appointments: {
@@ -179,11 +157,7 @@ export const getAnalyticsSummary = async (req, res, next) => {
           cancelled: cancelledAppointments,
           noShow: noShowAppointments,
         },
-        patients: {
-          total: totalPatients,
-          newThisPeriod: newPatientsThisPeriod,
-          returningThisPeriod,
-        },
+        patients: { total: totalPatients, newThisPeriod: newPatientsThisPeriod, returningThisPeriod },
         revenue: {
           total: totalRevenue,
           collected: totalRevenue,
@@ -204,144 +178,116 @@ export const getAnalyticsSummary = async (req, res, next) => {
   }
 };
 
+// ─── 2. Appointment Analytics ────────────────────────────────────────────────
 export const getAppointmentAnalytics = async (req, res, next) => {
   try {
     const { organizationId, branchId, startDate, endDate } = req.query;
 
-    const filter = {};
-    if (organizationId) filter.organizationId = organizationId;
-    if (branchId) filter.branchId = branchId;
+    const where = ['deleted_at IS NULL'];
+    const params = [];
+    if (organizationId) { where.push('organization_id = ?'); params.push(organizationId); }
+    if (branchId)       { where.push('branch_id = ?'); params.push(branchId); }
+    if (startDate)      { where.push('created_at >= ?'); params.push(new Date(startDate)); }
+    if (endDate)        { where.push('created_at <= ?'); params.push(new Date(endDate)); }
 
-    if (startDate || endDate) {
-      filter.createdAt = {};
-      if (startDate) filter.createdAt.$gte = new Date(startDate);
-      if (endDate) filter.createdAt.$lte = new Date(endDate);
-    }
-
-    const [total, booked, completed, cancelled] = await Promise.all([
-      Appointment.countDocuments(filter),
-      Appointment.countDocuments({ ...filter, status: 'Booked' }),
-      Appointment.countDocuments({ ...filter, status: 'Completed' }),
-      Appointment.countDocuments({ ...filter, status: 'Cancelled' }),
+    const [totalR, bookedR, completedR, cancelledR] = await Promise.all([
+      query(`SELECT COUNT(*) AS c FROM appointment WHERE ${where.join(' AND ')}`, params),
+      query(`SELECT COUNT(*) AS c FROM appointment WHERE ${where.join(' AND ')} AND status = ?`, [...params, 'Booked']),
+      query(`SELECT COUNT(*) AS c FROM appointment WHERE ${where.join(' AND ')} AND status = ?`, [...params, 'Completed']),
+      query(`SELECT COUNT(*) AS c FROM appointment WHERE ${where.join(' AND ')} AND status = ?`, [...params, 'Cancelled']),
     ]);
-
-    res.json({
+    return res.json({
       success: true,
-      data: { total, booked, completed, cancelled },
+      data: {
+        total:     totalR[0][0]?.c || 0,
+        booked:    bookedR[0][0]?.c || 0,
+        completed: completedR[0][0]?.c || 0,
+        cancelled: cancelledR[0][0]?.c || 0,
+      },
     });
   } catch (error) {
     next(error);
   }
 };
 
+// ─── 3. Patient Analytics ────────────────────────────────────────────────────
 export const getPatientAnalytics = async (req, res, next) => {
   try {
     const { organizationId, branchId, startDate, endDate } = req.query;
 
-    const filter = { isActive: true };
-    if (organizationId) filter.organizationId = organizationId;
-    if (branchId) filter.branchId = branchId;
+    const where = ['is_active = 1'];
+    const params = [];
+    if (organizationId) { where.push('organization_id = ?'); params.push(organizationId); }
+    if (branchId)       { where.push('branch_id = ?'); params.push(branchId); }
+    if (startDate)      { where.push('created_at >= ?'); params.push(new Date(startDate)); }
+    if (endDate)        { where.push('created_at <= ?'); params.push(new Date(endDate)); }
 
-    if (startDate || endDate) {
-      filter.createdAt = {};
-      if (startDate) filter.createdAt.$gte = new Date(startDate);
-      if (endDate) filter.createdAt.$lte = new Date(endDate);
-    }
-
-    const newPatients = await Patient.countDocuments(filter);
-
-    res.json({
-      success: true,
-      data: { newPatients },
-    });
+    const [[row]] = await query(`SELECT COUNT(*) AS c FROM patient WHERE ${where.join(' AND ')}`, params);
+    return res.json({ success: true, data: { newPatients: row?.c || 0 } });
   } catch (error) {
     next(error);
   }
 };
 
+// ─── 4. Revenue Analytics ────────────────────────────────────────────────────
 export const getRevenueAnalytics = async (req, res, next) => {
   try {
     const { organizationId, startDate, endDate } = req.query;
 
-    const matchStage = {};
-    if (organizationId) matchStage.organizationId = organizationId;
-    if (startDate || endDate) {
-      matchStage.collectedAt = {};
-      if (startDate) matchStage.collectedAt.$gte = new Date(startDate);
-      if (endDate) matchStage.collectedAt.$lte = new Date(endDate);
+    const where = [];
+    const params = [];
+    if (organizationId) {
+      where.push('invoice_id IN (SELECT invoice_id FROM invoice WHERE organization_id = ?)');
+      params.push(organizationId);
     }
+    if (startDate) { where.push('collected_at >= ?'); params.push(new Date(startDate)); }
+    if (endDate)   { where.push('collected_at <= ?'); params.push(new Date(endDate)); }
+    const whereSQL = where.length ? `WHERE ${where.join(' AND ')}` : '';
 
-    const pipeline = [
-      { $match: matchStage },
-      {
-        $group: {
-          _id: '$method',
-          total: { $sum: '$amount' },
-          count: { $sum: 1 },
-        },
-      },
-    ];
-
-    const byMethod = await Payment.aggregate(pipeline);
-
-    const totalRevenue = byMethod.reduce((sum, m) => sum + m.total, 0);
-    const totalTransactions = byMethod.reduce((sum, m) => sum + m.count, 0);
-
-    res.json({
-      success: true,
-      data: {
-        totalRevenue,
-        totalTransactions,
-        byMethod: byMethod.map(m => ({
-          method: m._id,
-          total: m.total,
-          count: m.count,
-        })),
-      },
-    });
+    const [rows] = await query(
+      `SELECT method, SUM(amount) AS total, COUNT(*) AS count
+       FROM payment ${whereSQL} GROUP BY method`,
+      params,
+    );
+    const byMethod = rows.map((r) => ({
+      method: r.method,
+      total: Number(r.total) || 0,
+      count: Number(r.count) || 0,
+    }));
+    const totalRevenue = byMethod.reduce((s, m) => s + m.total, 0);
+    const totalTransactions = byMethod.reduce((s, m) => s + m.count, 0);
+    return res.json({ success: true, data: { totalRevenue, totalTransactions, byMethod } });
   } catch (error) {
     next(error);
   }
 };
 
+// ─── 5. Service Analytics ────────────────────────────────────────────────────
 export const getServiceAnalytics = async (req, res, next) => {
   try {
     const { organizationId, startDate, endDate } = req.query;
 
-    const matchStage = {};
-    if (organizationId) matchStage.organizationId = organizationId;
-    if (startDate || endDate) {
-      matchStage.createdAt = {};
-      if (startDate) matchStage.createdAt.$gte = new Date(startDate);
-      if (endDate) matchStage.createdAt.$lte = new Date(endDate);
-    }
+    const where = ['i.deleted_at IS NULL'];
+    const params = [];
+    if (organizationId) { where.push('i.organization_id = ?'); params.push(organizationId); }
+    if (startDate)      { where.push('i.created_at >= ?'); params.push(new Date(startDate)); }
+    if (endDate)        { where.push('i.created_at <= ?'); params.push(new Date(endDate)); }
 
-    const pipeline = [
-      { $match: matchStage },
-      { $unwind: '$lineItems' },
-      {
-        $group: {
-          _id: '$lineItems.description',
-          count: { $sum: '$lineItems.quantity' },
-          revenue: { $sum: '$lineItems.total' },
-        },
-      },
-      { $sort: { count: -1 } },
-      { $limit: 20 },
-    ];
-
-    const services = await Invoice.aggregate(pipeline);
-
-    res.json({
-      success: true,
-      data: {
-        services: services.map(s => ({
-          name: s._id,
-          count: s.count,
-          revenue: s.revenue,
-        })),
-      },
-    });
+    const [rows] = await query(
+      `SELECT li.description AS name, SUM(li.quantity) AS count, SUM(li.total) AS revenue
+       FROM invoice_line_items li
+       JOIN invoice i ON i.invoice_id = li.invoice_id
+       WHERE ${where.join(' AND ')}
+       GROUP BY li.description
+       ORDER BY count DESC LIMIT 20`,
+      params,
+    );
+    const services = rows.map((r) => ({
+      name: r.name || 'Unknown',
+      count: Number(r.count) || 0,
+      revenue: Number(r.revenue) || 0,
+    }));
+    return res.json({ success: true, data: { services } });
   } catch (error) {
     next(error);
   }

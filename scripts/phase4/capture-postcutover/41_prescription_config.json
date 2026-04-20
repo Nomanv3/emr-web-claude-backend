@@ -1,0 +1,62 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "_id": "<scrubbed>",
+      "branchId": "branch-001",
+      "configId": "config-001",
+      "createdAt": "<scrubbed>",
+      "custom_sections": [],
+      "doctorId": "dev-doctor-001",
+      "enabled_sections": {
+        "advice": true,
+        "customSections": true,
+        "diagnosis": true,
+        "examination": true,
+        "followUp": true,
+        "labInvestigations": true,
+        "labResults": true,
+        "medicalHistory": true,
+        "medications": true,
+        "notes": true,
+        "procedures": true,
+        "referral": true,
+        "symptoms": true,
+        "vitals": true
+      },
+      "organizationId": "org-001",
+      "print_enabled_sections": {
+        "advice": true,
+        "diagnosis": true,
+        "followUp": true,
+        "labInvestigations": true,
+        "labResults": true,
+        "medicalHistory": true,
+        "medications": true,
+        "notes": true,
+        "procedures": true,
+        "referral": true,
+        "symptoms": true,
+        "vitals": true
+      },
+      "section_order": [
+        "vitals",
+        "symptoms",
+        "diagnosis",
+        "examination",
+        "medications",
+        "labInvestigations",
+        "labResults",
+        "medicalHistory",
+        "procedures",
+        "followUp",
+        "referral",
+        "advice",
+        "notes",
+        "customSections"
+      ],
+      "updatedAt": "<scrubbed>"
+    },
+    "success": true
+  }
+}

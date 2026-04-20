@@ -1,0 +1,27 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "byMethod": [
+        {
+          "count": 1,
+          "method": "Card",
+          "total": 800
+        },
+        {
+          "count": 1,
+          "method": "UPI",
+          "total": 700
+        },
+        {
+          "count": 2,
+          "method": "Cash",
+          "total": 1000
+        }
+      ],
+      "totalRevenue": 2500,
+      "totalTransactions": 4
+    },
+    "success": true
+  }
+}

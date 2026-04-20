@@ -1,0 +1,13 @@
+{
+  "status": 200,
+  "body": {
+    "data": [],
+    "pagination": {
+      "limit": 50,
+      "page": 1,
+      "total": 0,
+      "totalPages": 0
+    },
+    "success": true
+  }
+}

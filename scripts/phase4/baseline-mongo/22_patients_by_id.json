@@ -1,0 +1,45 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "__v": "<scrubbed>",
+      "_id": "<scrubbed>",
+      "address": {
+        "city": "",
+        "pincode": "",
+        "state": "",
+        "street": "Malegaon, Maharashtra, India"
+      },
+      "bloodGroup": "A-",
+      "branchId": "branch-001",
+      "createdAt": "<scrubbed>",
+      "createdBy": "dev-doctor-001",
+      "dateOfBirth": "2001-12-28T00:00:00.000Z",
+      "gender": "M",
+      "isActive": true,
+      "medicalHistory": {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "allergies": [],
+        "conditions": [],
+        "createdAt": "<scrubbed>",
+        "familyHistory": [],
+        "historyId": "0c8b1699-f576-4a76-9c2d-19847738e6dd",
+        "noHistory": true,
+        "patientId": "04b76ad0-1d6e-4363-a398-ee847fe43a0b",
+        "surgicalHistory": [],
+        "updatedAt": "<scrubbed>",
+        "updatedBy": "dev-doctor-001"
+      },
+      "name": "Sharukh Khan",
+      "organizationId": "org-001",
+      "patientId": "04b76ad0-1d6e-4363-a398-ee847fe43a0b",
+      "phone": "8690498520",
+      "salutation": "Mr",
+      "tags": [],
+      "uhid": "UHID00031",
+      "updatedAt": "<scrubbed>"
+    },
+    "success": true
+  }
+}

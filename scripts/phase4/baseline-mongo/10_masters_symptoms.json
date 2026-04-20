@@ -1,0 +1,510 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "symptoms": [
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R10.9",
+          "name": "Abdominal Pain",
+          "symptomId": "3cf4b696-56c9-4b6d-9705-b3eba4e145d7",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Psychiatric",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "F41.9",
+          "name": "Anxiety",
+          "symptomId": "6bb60eca-cb08-4458-a5eb-d954ab9a575b",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "M54.9",
+          "name": "Back Pain",
+          "symptomId": "22a10744-5922-4b71-8d66-1b7b49db468d",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R14.0",
+          "name": "Bloating",
+          "symptomId": "af8d3672-d4a5-4f59-a297-f302c61e7d54",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Ophthalmological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "H53.8",
+          "name": "Blurred Vision",
+          "symptomId": "4988ca0e-170e-4c6c-bc3e-7cb3028f1427",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "General",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "M79.3",
+          "name": "Body Ache",
+          "symptomId": "3aad0533-f958-4b3c-92ce-66db6047a554",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Urological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R30.0",
+          "name": "Burning Urination",
+          "symptomId": "1de4de3e-7c99-4ddf-81f5-dc5ec2505619",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Cardiovascular",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R07.9",
+          "name": "Chest Pain",
+          "symptomId": "9a80c2a8-6fc4-407a-a927-dabf03bf8add",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Respiratory",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R07.89",
+          "name": "Chest Tightness",
+          "symptomId": "f6978567-e371-499e-a63a-37ba804f77b5",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "General",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R68.83",
+          "name": "Chills",
+          "symptomId": "ff4453fa-9451-40a5-82f1-7ee27142fb11",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Cardiovascular",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R20.8",
+          "name": "Cold Hands/Feet",
+          "symptomId": "8a57bf6e-2a82-4296-8beb-869523467e38",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "K59.00",
+          "name": "Constipation",
+          "symptomId": "607a12b1-34a0-4dc2-96ff-7608e8502d77",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Respiratory",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R05",
+          "name": "Cough",
+          "symptomId": "e587c20a-aaba-46d2-b5f0-936be835f01a",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Psychiatric",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "F32.9",
+          "name": "Depression",
+          "symptomId": "6512032f-511d-4ab0-9738-e390db1d7984",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R19.7",
+          "name": "Diarrhea",
+          "symptomId": "49f9f5ae-2c35-4dc9-8941-745859f82d72",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Neurological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R42",
+          "name": "Dizziness",
+          "symptomId": "167a9d02-90fe-4319-a862-73d308ad8d09",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "ENT",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R68.2",
+          "name": "Dry Mouth",
+          "symptomId": "7512b39b-8ea7-4832-8f60-dc4206996661",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "ENT",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "H92.09",
+          "name": "Ear Pain",
+          "symptomId": "ad08d52b-2af6-4dcf-b1ce-990bf81e12d1",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Endocrine",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R63.1",
+          "name": "Excessive Thirst",
+          "symptomId": "ba081ae8-dad2-4a20-bdb4-ba032110a507",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "General",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R53.83",
+          "name": "Fatigue",
+          "symptomId": "893452d6-b77e-4b0e-be7d-970bc07fc661",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "General",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R50.9",
+          "name": "Fever",
+          "symptomId": "cf6b96c7-fa02-47ad-ade0-5c8dcd10a7d6",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Endocrine",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R35.0",
+          "name": "Frequent Urination",
+          "symptomId": "8c7f7687-a47f-4f36-98af-5d0d8e67d86c",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Dermatological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "L65.9",
+          "name": "Hair Loss",
+          "symptomId": "1c4e8fff-ddc0-40cc-9dc9-3321edb1511d",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Neurological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R51",
+          "name": "Headache",
+          "symptomId": "b24145da-07ea-47cb-b838-aefcc818d15c",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R12",
+          "name": "Heartburn",
+          "symptomId": "c2a76b63-4ddd-49b9-8fe0-28fdae50988d",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Neurological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "G47.00",
+          "name": "Insomnia",
+          "symptomId": "b8e6716c-2d5e-43cd-b7b6-906b355cf068",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Dermatological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "L29.9",
+          "name": "Itching",
+          "symptomId": "6ed02b43-d1ae-4ae2-b20a-67b7e0c2e93b",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "M25.50",
+          "name": "Joint Pain",
+          "symptomId": "77e2060b-bd06-4667-9080-3d25d2601220",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "M25.569",
+          "name": "Knee Pain",
+          "symptomId": "500aaa7a-0fc6-4d62-b352-cbb291c480cd",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R25.2",
+          "name": "Leg Cramps",
+          "symptomId": "ad300949-a312-4482-997f-befe1156c884",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R63.0",
+          "name": "Loss of Appetite",
+          "symptomId": "c4c96780-24a5-4bbd-9f87-6454f9fc2eff",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "M79.1",
+          "name": "Muscle Pain",
+          "symptomId": "276ed25a-2b6b-444e-b326-078391eb82f4",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "ENT",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R09.81",
+          "name": "Nasal Congestion",
+          "symptomId": "6d9fbf22-697a-4688-b2ea-2f06f8d49395",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R11.0",
+          "name": "Nausea",
+          "symptomId": "53dce2dd-d906-440e-bcdf-15823d5aea1c",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "M54.2",
+          "name": "Neck Pain",
+          "symptomId": "a38ab2b7-0432-4dcd-a0c8-560818965a4a",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "General",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R61",
+          "name": "Night Sweats",
+          "symptomId": "39d43610-3139-4809-b51e-34f43fc11847",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Neurological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R20.0",
+          "name": "Numbness",
+          "symptomId": "da528313-c3aa-4e40-a5a4-9c00479f0729",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Cardiovascular",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R00.2",
+          "name": "Palpitations",
+          "symptomId": "ea280d20-77b2-4a68-a049-48d0bd3a262f",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "ENT",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "J00",
+          "name": "Runny Nose",
+          "symptomId": "ff831615-dfb7-4ea6-9bb8-edd1abd536f1",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Respiratory",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R06.02",
+          "name": "Shortness of Breath",
+          "symptomId": "8a96036c-de53-48de-989b-6522e80fe286",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "M25.519",
+          "name": "Shoulder Pain",
+          "symptomId": "496225bb-91c4-4d88-b97a-2e0fabb9a5f5",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Dermatological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R21",
+          "name": "Skin Rash",
+          "symptomId": "73e6a115-a9bc-40d1-9814-c9a6b90a91dd",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "ENT",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R06.7",
+          "name": "Sneezing",
+          "symptomId": "114bacc4-8bd9-43ae-a16c-6deceeb0220c",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "ENT",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "J02.9",
+          "name": "Sore Throat",
+          "symptomId": "34bd0279-666d-4af5-be95-ba1135a45884",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "General",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R60.9",
+          "name": "Swelling",
+          "symptomId": "8e6f6d57-eeef-470d-8f75-d56900def8ac",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Neurological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R20.2",
+          "name": "Tingling",
+          "symptomId": "aa3ef3b3-ae65-402e-9cec-3b70ade4c46e",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Neurological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R25.1",
+          "name": "Tremors",
+          "symptomId": "7a32d2c8-72b9-4f31-8a97-c8c4e45e6698",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Urological",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R35.0",
+          "name": "Urinary Frequency",
+          "symptomId": "82194d48-9f79-406a-8c70-d4155269fd7f",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R11.10",
+          "name": "Vomiting",
+          "symptomId": "11cbfff7-1665-466b-aba5-256b7d5cbaf8",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "General",
+          "createdAt": "<scrubbed>",
+          "icdMapping": "R63.5",
+          "name": "Weight Gain",
+          "symptomId": "a3df5747-3b6b-429c-9b5b-ddc755ba91fa",
+          "updatedAt": "<scrubbed>"
+        }
+      ]
+    },
+    "success": true
+  }
+}

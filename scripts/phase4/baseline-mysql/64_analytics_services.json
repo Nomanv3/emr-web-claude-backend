@@ -1,0 +1,35 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "services": [
+        {
+          "count": 2,
+          "name": "ECG",
+          "revenue": 600
+        },
+        {
+          "count": 3,
+          "name": "General Consultation",
+          "revenue": 1500
+        },
+        {
+          "count": 1,
+          "name": "Health Check-up Package",
+          "revenue": 2000
+        },
+        {
+          "count": 2,
+          "name": "Lab Work",
+          "revenue": 400
+        },
+        {
+          "count": 1,
+          "name": "Specialist Consultation",
+          "revenue": 800
+        }
+      ]
+    },
+    "success": true
+  }
+}

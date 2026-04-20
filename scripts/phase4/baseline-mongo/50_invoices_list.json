@@ -1,0 +1,291 @@
+{
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "balanceDue": 700,
+        "createdAt": "<scrubbed>",
+        "discount": 100,
+        "invoiceId": "a04efeaf-c7b1-4a57-b03a-e929edc940ab",
+        "lineItems": [
+          {
+            "_id": "<scrubbed>",
+            "description": "ECG",
+            "discount": 0,
+            "quantity": 1,
+            "total": 300,
+            "unitPrice": 300
+          },
+          {
+            "_id": "<scrubbed>",
+            "description": "Lab Work",
+            "discount": 0,
+            "quantity": 1,
+            "total": 200,
+            "unitPrice": 200
+          },
+          {
+            "_id": "<scrubbed>",
+            "description": "Specialist Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 800,
+            "unitPrice": 800
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 500,
+        "patientId": "0b2377d7-9f75-49f2-b147-5a47fcb6c9b2",
+        "status": "Partial",
+        "subtotal": 1300,
+        "tax": 0,
+        "totalAmount": 1200,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "appointmentId": "fb71ae0b-eb4a-46da-b119-6295c163cc51",
+        "balanceDue": 0,
+        "createdAt": "<scrubbed>",
+        "discount": 0,
+        "invoiceId": "3fe96352-6143-46ff-b068-c384736583cb",
+        "lineItems": [
+          {
+            "_id": "<scrubbed>",
+            "description": "General Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 500,
+            "unitPrice": 500
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 500,
+        "patientId": "566a052d-b862-461e-9ab3-e5e9a2627622",
+        "status": "Paid",
+        "subtotal": 500,
+        "tax": 0,
+        "totalAmount": 500,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "appointmentId": "02df3fe3-35ba-469d-b9f3-22785b42ef99",
+        "balanceDue": 0,
+        "createdAt": "<scrubbed>",
+        "discount": 0,
+        "invoiceId": "1b3e25a0-9cd1-491f-8126-31f87382f094",
+        "lineItems": [
+          {
+            "_id": "<scrubbed>",
+            "description": "ECG",
+            "discount": 0,
+            "quantity": 1,
+            "total": 300,
+            "unitPrice": 300
+          },
+          {
+            "_id": "<scrubbed>",
+            "description": "General Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 500,
+            "unitPrice": 500
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 800,
+        "patientId": "6bddab05-e1e3-45fd-863a-5ddcd18d4d83",
+        "status": "Paid",
+        "subtotal": 800,
+        "tax": 0,
+        "totalAmount": 800,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "balanceDue": 0,
+        "createdAt": "<scrubbed>",
+        "discount": 0,
+        "invoiceId": "965a0719-19a7-445d-a360-0d0737a8efd6",
+        "lineItems": [
+          {
+            "_id": "<scrubbed>",
+            "description": "Specialist Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 800,
+            "unitPrice": 800
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 800,
+        "patientId": "8418e41c-f373-4ef5-b820-f9bdf24918a7",
+        "status": "Paid",
+        "subtotal": 800,
+        "tax": 0,
+        "totalAmount": 800,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "balanceDue": 800,
+        "createdAt": "<scrubbed>",
+        "discount": 0,
+        "invoiceId": "1bd23f98-9c88-4f62-957b-6cd003170b38",
+        "lineItems": [
+          {
+            "_id": "<scrubbed>",
+            "description": "Specialist Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 800,
+            "unitPrice": 800
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 0,
+        "patientId": "8418e41c-f373-4ef5-b820-f9bdf24918a7",
+        "status": "Unpaid",
+        "subtotal": 800,
+        "tax": 0,
+        "totalAmount": 800,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "balanceDue": 1800,
+        "createdAt": "<scrubbed>",
+        "discount": 200,
+        "invoiceId": "8493596e-5190-44a6-96ed-ec0a028bda0f",
+        "lineItems": [
+          {
+            "_id": "<scrubbed>",
+            "description": "Health Check-up Package",
+            "discount": 0,
+            "quantity": 1,
+            "total": 2000,
+            "unitPrice": 2000
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 0,
+        "patientId": "9ba96196-95a1-492e-a240-1cead47b2caa",
+        "status": "Unpaid",
+        "subtotal": 2000,
+        "tax": 0,
+        "totalAmount": 1800,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "balanceDue": 1300,
+        "createdAt": "<scrubbed>",
+        "discount": 0,
+        "invoiceId": "716ccea6-28ef-495a-b7ed-2c1111d15445",
+        "lineItems": [
+          {
+            "_id": "<scrubbed>",
+            "description": "ECG",
+            "discount": 0,
+            "quantity": 1,
+            "total": 300,
+            "unitPrice": 300
+          },
+          {
+            "_id": "<scrubbed>",
+            "description": "Emergency Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 1000,
+            "unitPrice": 1000
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 0,
+        "patientId": "ac95a857-cf13-4202-9c52-1423ba7b25e5",
+        "status": "Unpaid",
+        "subtotal": 1300,
+        "tax": 0,
+        "totalAmount": 1300,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "appointmentId": "06085cfc-bddf-4751-8826-9b14a1d5ebb3",
+        "balanceDue": 0,
+        "createdAt": "<scrubbed>",
+        "discount": 0,
+        "invoiceId": "3126d8f1-4928-4ff4-bea0-4c512da719d4",
+        "lineItems": [
+          {
+            "_id": "<scrubbed>",
+            "description": "General Consultation",
+            "discount": 0,
+            "quantity": 1,
+            "total": 500,
+            "unitPrice": 500
+          },
+          {
+            "_id": "<scrubbed>",
+            "description": "Lab Work",
+            "discount": 0,
+            "quantity": 1,
+            "total": 200,
+            "unitPrice": 200
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 700,
+        "patientId": "b5d09d7e-0239-4181-971f-5dbd6b7e674e",
+        "status": "Paid",
+        "subtotal": 700,
+        "tax": 0,
+        "totalAmount": 700,
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "balanceDue": 300,
+        "createdAt": "<scrubbed>",
+        "discount": 0,
+        "invoiceId": "0229f5a1-309b-4256-812e-186daa1a4868",
+        "lineItems": [
+          {
+            "_id": "<scrubbed>",
+            "description": "ECG",
+            "discount": 0,
+            "quantity": 1,
+            "total": 300,
+            "unitPrice": 300
+          }
+        ],
+        "organizationId": "org-001",
+        "paidAmount": 0,
+        "patientId": "ff2fee85-1d0b-43cf-a110-995cbd572d3d",
+        "status": "Unpaid",
+        "subtotal": 300,
+        "tax": 0,
+        "totalAmount": 300,
+        "updatedAt": "<scrubbed>"
+      }
+    ],
+    "pagination": {
+      "limit": 20,
+      "page": 1,
+      "total": 9,
+      "totalPages": 1
+    },
+    "success": true
+  }
+}

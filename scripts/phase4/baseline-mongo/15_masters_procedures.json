@@ -1,0 +1,145 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "procedures": [
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Diagnostic",
+          "createdAt": "<scrubbed>",
+          "name": "Blood Sample Collection",
+          "procedureId": "dbf93722-0597-4636-9925-e7504bb84465",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Procedure",
+          "createdAt": "<scrubbed>",
+          "name": "Catheterization",
+          "procedureId": "54449a1f-7ad4-43ab-9aab-abfe9f342045",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Minor",
+          "createdAt": "<scrubbed>",
+          "name": "Ear Syringing",
+          "procedureId": "d85d5d8e-5f71-4068-8bbf-261656ae969c",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Diagnostic",
+          "createdAt": "<scrubbed>",
+          "name": "ECG Recording",
+          "procedureId": "c2fa6882-af3b-4418-bbdb-3541dab1322d",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Minor",
+          "createdAt": "<scrubbed>",
+          "name": "Foreign Body Removal (Ear)",
+          "procedureId": "0c56061e-5ad3-418f-9ece-9951fbc583b3",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Minor",
+          "createdAt": "<scrubbed>",
+          "name": "Foreign Body Removal (Eye)",
+          "procedureId": "79bbac4f-4cd4-460b-91e2-819f208568ba",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Administration",
+          "createdAt": "<scrubbed>",
+          "name": "IM Injection",
+          "procedureId": "17d4ffed-b05a-49e2-98ed-0147a3ba8a25",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Minor Surgery",
+          "createdAt": "<scrubbed>",
+          "name": "Incision & Drainage",
+          "procedureId": "31c750f6-e42d-40e7-8c1e-adfb093f4cfa",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Procedure",
+          "createdAt": "<scrubbed>",
+          "name": "IV Cannulation",
+          "procedureId": "1bb715a8-385f-4170-a31f-4e7170cebc74",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Administration",
+          "createdAt": "<scrubbed>",
+          "name": "IV Injection",
+          "procedureId": "07575d31-1469-4169-844e-18b512f38876",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Therapeutic",
+          "createdAt": "<scrubbed>",
+          "name": "Nebulization",
+          "procedureId": "83b6ae58-da22-4c33-9abd-38194c45b2b5",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Orthopedic",
+          "createdAt": "<scrubbed>",
+          "name": "Plaster Cast Application",
+          "procedureId": "f4b815e2-091f-4bd6-9396-061c0c17b5e3",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Orthopedic",
+          "createdAt": "<scrubbed>",
+          "name": "Splinting",
+          "procedureId": "f10d6437-5bd1-48f5-8e50-6a3c0eb4f151",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Minor Surgery",
+          "createdAt": "<scrubbed>",
+          "name": "Suturing",
+          "procedureId": "a313f1a1-5131-42a6-b7a6-d79f3976a8b3",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Minor",
+          "createdAt": "<scrubbed>",
+          "name": "Wound Dressing",
+          "procedureId": "acc84996-c0a8-4b6a-b5e6-454847a603b3",
+          "updatedAt": "<scrubbed>"
+        }
+      ]
+    },
+    "success": true
+  }
+}

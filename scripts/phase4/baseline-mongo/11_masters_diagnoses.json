@@ -1,0 +1,510 @@
+{
+  "status": 200,
+  "body": {
+    "data": {
+      "diagnoses": [
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Cardiovascular",
+          "createdAt": "<scrubbed>",
+          "description": "Atrial Fibrillation",
+          "diagnosisId": "83db3f18-c154-407a-92f5-f149900dd7a3",
+          "icdCode": "I48.91",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Cardiovascular",
+          "createdAt": "<scrubbed>",
+          "description": "Coronary Artery Disease",
+          "diagnosisId": "d49bb6fe-cfc4-45e2-bf79-c0b7761555ed",
+          "icdCode": "I25.10",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Cardiovascular",
+          "createdAt": "<scrubbed>",
+          "description": "Essential (Primary) Hypertension",
+          "diagnosisId": "75439c26-75a7-4312-b17c-2525c14358ba",
+          "icdCode": "I10",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Cardiovascular",
+          "createdAt": "<scrubbed>",
+          "description": "Heart Failure, unspecified",
+          "diagnosisId": "085cac78-a8e0-4286-ad5d-c9cd8f3476c5",
+          "icdCode": "I50.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Dermatological",
+          "createdAt": "<scrubbed>",
+          "description": "Dermatitis, unspecified",
+          "diagnosisId": "4a88f4a9-55f3-436e-9ebd-2b5e8c40c81e",
+          "icdCode": "L30.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Dermatological",
+          "createdAt": "<scrubbed>",
+          "description": "Psoriasis, unspecified",
+          "diagnosisId": "0555a8d3-a311-42be-8b15-31088370bf84",
+          "icdCode": "L40.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Dermatological",
+          "createdAt": "<scrubbed>",
+          "description": "Urticaria, unspecified",
+          "diagnosisId": "9342fc30-b9b7-42fb-a8f8-c3806855b6ff",
+          "icdCode": "L50.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Endocrine",
+          "createdAt": "<scrubbed>",
+          "description": "Hyperlipidemia, unspecified",
+          "diagnosisId": "3de4b467-409b-4330-8a9d-6d00724355c5",
+          "icdCode": "E78.5",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Endocrine",
+          "createdAt": "<scrubbed>",
+          "description": "Hypothyroidism, unspecified",
+          "diagnosisId": "9e8ad429-5341-4685-8186-3e0975465db6",
+          "icdCode": "E03.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Endocrine",
+          "createdAt": "<scrubbed>",
+          "description": "Nontoxic Goiter, unspecified",
+          "diagnosisId": "9cead816-a061-4ffd-9954-ad3f8d5b0d30",
+          "icdCode": "E04.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Endocrine",
+          "createdAt": "<scrubbed>",
+          "description": "Obesity, unspecified",
+          "diagnosisId": "41f39309-eae4-4b95-b687-532f0c78599b",
+          "icdCode": "E66.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Endocrine",
+          "createdAt": "<scrubbed>",
+          "description": "Type 1 Diabetes Mellitus",
+          "diagnosisId": "26ef4bda-0b80-4c29-9269-6dc060b19dbb",
+          "icdCode": "E10",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Endocrine",
+          "createdAt": "<scrubbed>",
+          "description": "Type 2 Diabetes Mellitus",
+          "diagnosisId": "d54f706b-60f2-45f9-8f24-bbf79e72160c",
+          "icdCode": "E11",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "ENT",
+          "createdAt": "<scrubbed>",
+          "description": "Acute Pharyngitis, unspecified",
+          "diagnosisId": "eba49d77-a295-4979-a78e-a08264145433",
+          "icdCode": "J02.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "ENT",
+          "createdAt": "<scrubbed>",
+          "description": "Acute Sinusitis, unspecified",
+          "diagnosisId": "57e395f9-06a6-42f3-8977-ceebb7e03a26",
+          "icdCode": "J01.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "ENT",
+          "createdAt": "<scrubbed>",
+          "description": "Allergic Rhinitis, unspecified",
+          "diagnosisId": "02eccbf3-490f-4e94-8567-63a63a52b404",
+          "icdCode": "J30.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "ENT",
+          "createdAt": "<scrubbed>",
+          "description": "Otitis Media, unspecified",
+          "diagnosisId": "3b41cda0-55af-44b8-8904-c1801a05f208",
+          "icdCode": "H66.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "description": "Cholelithiasis (Gallstones)",
+          "diagnosisId": "57cbbb22-0cab-41d9-83da-05b5e598e5b6",
+          "icdCode": "K80.20",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "description": "Gastritis, unspecified",
+          "diagnosisId": "c3bbefd3-1be6-4641-9ee3-136deaa453af",
+          "icdCode": "K29.7",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "description": "Gastroesophageal Reflux Disease (GERD)",
+          "diagnosisId": "958a5036-2706-47e7-939e-f8ab4d60304a",
+          "icdCode": "K21.0",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "description": "Infectious Gastroenteritis and Colitis, unspecified",
+          "diagnosisId": "c279f7ec-d694-4dd5-be3d-241620709bce",
+          "icdCode": "A09",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Gastrointestinal",
+          "createdAt": "<scrubbed>",
+          "description": "Irritable Bowel Syndrome (IBS)",
+          "diagnosisId": "654b3ceb-0387-4c07-b497-c1b2205bff6f",
+          "icdCode": "K58.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "General",
+          "createdAt": "<scrubbed>",
+          "description": "Fever, unspecified",
+          "diagnosisId": "ff09c6dc-9fa8-4494-945d-7c91d4c0f028",
+          "icdCode": "R50.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Hematological",
+          "createdAt": "<scrubbed>",
+          "description": "Iron Deficiency Anemia, unspecified",
+          "diagnosisId": "ba23371a-409d-4815-b004-4089aa2529e3",
+          "icdCode": "D50.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Infectious",
+          "createdAt": "<scrubbed>",
+          "description": "Candidal Stomatitis (Oral Thrush)",
+          "diagnosisId": "ed6f9348-b0a8-43ea-a2f2-e5430fcf2949",
+          "icdCode": "B37.0",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Infectious",
+          "createdAt": "<scrubbed>",
+          "description": "Dengue Fever",
+          "diagnosisId": "7b301de6-74bd-4650-8ff8-67adc81c00c8",
+          "icdCode": "A90",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Infectious",
+          "createdAt": "<scrubbed>",
+          "description": "Hepatitis A without hepatic coma",
+          "diagnosisId": "38c39055-1223-4651-b008-fb8e612da60a",
+          "icdCode": "B15.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Infectious",
+          "createdAt": "<scrubbed>",
+          "description": "Plasmodium falciparum Malaria",
+          "diagnosisId": "d7e8bf87-cc67-4382-a657-e4a72ae45a8b",
+          "icdCode": "B50.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Infectious",
+          "createdAt": "<scrubbed>",
+          "description": "Tuberculosis of Lung",
+          "diagnosisId": "c9f29955-3bcb-4909-bd4d-cb4613ffe0e1",
+          "icdCode": "A15.0",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Infectious",
+          "createdAt": "<scrubbed>",
+          "description": "Typhoid Fever",
+          "diagnosisId": "e02aef13-11ca-4d26-8d61-b135d7f0e2a4",
+          "icdCode": "A01.0",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Infectious",
+          "createdAt": "<scrubbed>",
+          "description": "Varicella (Chickenpox)",
+          "diagnosisId": "796d3b6b-ab02-4ff2-8392-037d17f8a9b0",
+          "icdCode": "B01.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Infectious",
+          "createdAt": "<scrubbed>",
+          "description": "Viral Infection, unspecified",
+          "diagnosisId": "7086984d-3d96-4272-96f0-81c22194478e",
+          "icdCode": "B34.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "description": "Age-related Osteoporosis without pathological fracture",
+          "diagnosisId": "fd89197e-615a-4d32-9ddf-b9b6eb497447",
+          "icdCode": "M81.0",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "description": "Gout, unspecified",
+          "diagnosisId": "ddf38010-31be-4b4c-be76-128f76388dbe",
+          "icdCode": "M10.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "description": "Low Back Pain",
+          "diagnosisId": "a86dd15d-9f35-4278-b65a-200c51285a69",
+          "icdCode": "M54.5",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "description": "Osteoarthritis of Knee",
+          "diagnosisId": "2b8b281a-933f-47e6-b279-f43b9ffb7a39",
+          "icdCode": "M17.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "description": "Panniculitis, unspecified / Fibromyalgia",
+          "diagnosisId": "15183a13-f744-4f9b-9f72-c0c17889fcef",
+          "icdCode": "M79.3",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Musculoskeletal",
+          "createdAt": "<scrubbed>",
+          "description": "Rheumatoid Arthritis, unspecified",
+          "diagnosisId": "819ab55a-4a68-43b4-a01d-6d9e72e683e2",
+          "icdCode": "M06.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Neurological",
+          "createdAt": "<scrubbed>",
+          "description": "Insomnia, unspecified",
+          "diagnosisId": "ad1f552e-f692-485e-a00f-ed3fbf76d851",
+          "icdCode": "G47.00",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Neurological",
+          "createdAt": "<scrubbed>",
+          "description": "Migraine, unspecified",
+          "diagnosisId": "fa475ccc-aeb6-4ea3-b2ec-eec1eb82c718",
+          "icdCode": "G43.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Ophthalmological",
+          "createdAt": "<scrubbed>",
+          "description": "Conjunctivitis, unspecified",
+          "diagnosisId": "2533b760-a1a6-4de0-b82b-b937606962c8",
+          "icdCode": "H10.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Psychiatric",
+          "createdAt": "<scrubbed>",
+          "description": "Generalized Anxiety Disorder",
+          "diagnosisId": "1a1e69b5-df79-4584-9f31-8fa7321e065b",
+          "icdCode": "F41.1",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Psychiatric",
+          "createdAt": "<scrubbed>",
+          "description": "Major Depressive Disorder, single episode, unspecified",
+          "diagnosisId": "3cae126a-d424-4ab1-9a26-b154ef59d25d",
+          "icdCode": "F32.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Respiratory",
+          "createdAt": "<scrubbed>",
+          "description": "Acute Bronchitis, unspecified",
+          "diagnosisId": "ef183eff-f43b-4af3-8936-2650cb830430",
+          "icdCode": "J20.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Respiratory",
+          "createdAt": "<scrubbed>",
+          "description": "Acute upper respiratory infection, unspecified",
+          "diagnosisId": "3fe062ef-4847-427b-ba60-9b403dc36581",
+          "icdCode": "J06.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Respiratory",
+          "createdAt": "<scrubbed>",
+          "description": "Asthma, unspecified",
+          "diagnosisId": "2588b3f7-537d-4288-8e58-0edb59c52b1b",
+          "icdCode": "J45.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Respiratory",
+          "createdAt": "<scrubbed>",
+          "description": "Chronic Obstructive Pulmonary Disease (COPD)",
+          "diagnosisId": "09b91483-b614-4501-8879-9b4d58f8fde4",
+          "icdCode": "J44.1",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Respiratory",
+          "createdAt": "<scrubbed>",
+          "description": "Pneumonia, unspecified organism",
+          "diagnosisId": "f5799716-482c-4e54-bc32-ead655dcd7cf",
+          "icdCode": "J18.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Urological",
+          "createdAt": "<scrubbed>",
+          "description": "Chronic Kidney Disease, unspecified",
+          "diagnosisId": "e24d1714-fa2b-4273-990d-15040ad8e415",
+          "icdCode": "N18.9",
+          "updatedAt": "<scrubbed>"
+        },
+        {
+          "__v": "<scrubbed>",
+          "_id": "<scrubbed>",
+          "category": "Urological",
+          "createdAt": "<scrubbed>",
+          "description": "Urinary Tract Infection, site not specified",
+          "diagnosisId": "17961511-986c-4d93-9963-cbb3c048a881",
+          "icdCode": "N39.0",
+          "updatedAt": "<scrubbed>"
+        }
+      ]
+    },
+    "success": true
+  }
+}

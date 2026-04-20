@@ -176,7 +176,8 @@ const startServer = async () => {
   try {
     await connectDB();
   } catch (error) {
-    console.warn('MongoDB connection failed, starting server anyway:', error.message);
+    console.error('MySQL connection failed — refusing to start server:', error.message);
+    process.exit(1);
   }
   app.listen(config.port, () => {
     console.log(`EMR Backend running on port ${config.port}`);

@@ -1,0 +1,77 @@
+{
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "amount": 800,
+        "collectedAt": "2026-04-14T10:06:36.213Z",
+        "collectedBy": "dev-receptionist-001",
+        "createdAt": "<scrubbed>",
+        "invoiceId": "1b3e25a0-9cd1-491f-8126-31f87382f094",
+        "method": "Card",
+        "paymentId": "52141eec-4132-4292-82f5-4e76696ec90a",
+        "transactionRef": "CARD-TXN-20260302-001",
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "amount": 700,
+        "collectedAt": "2026-04-14T10:06:36.213Z",
+        "collectedBy": "dev-receptionist-001",
+        "createdAt": "<scrubbed>",
+        "invoiceId": "3126d8f1-4928-4ff4-bea0-4c512da719d4",
+        "method": "UPI",
+        "paymentId": "a157f07a-260c-477f-8d54-22eab14cf66c",
+        "transactionRef": "UPI-TXN-20260302-001",
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "amount": 500,
+        "collectedAt": "2026-04-14T10:06:36.213Z",
+        "collectedBy": "dev-receptionist-001",
+        "createdAt": "<scrubbed>",
+        "invoiceId": "3fe96352-6143-46ff-b068-c384736583cb",
+        "method": "Cash",
+        "paymentId": "63be1cb6-2d04-472d-a2a3-fa29240faa6f",
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "amount": 800,
+        "collectedAt": "2026-04-14T10:31:38.403Z",
+        "collectedBy": "Dr. Arjun Mehta",
+        "createdAt": "<scrubbed>",
+        "invoiceId": "965a0719-19a7-445d-a360-0d0737a8efd6",
+        "method": "Cash",
+        "paymentId": "c80c30a1-73fa-4d65-99bf-3377cd8687b4",
+        "receiptId": "56181fd4-cb58-4ea4-a5eb-e72347973e75",
+        "updatedAt": "<scrubbed>"
+      },
+      {
+        "__v": "<scrubbed>",
+        "_id": "<scrubbed>",
+        "amount": 500,
+        "collectedAt": "2026-04-14T10:06:36.213Z",
+        "collectedBy": "dev-receptionist-001",
+        "createdAt": "<scrubbed>",
+        "invoiceId": "a04efeaf-c7b1-4a57-b03a-e929edc940ab",
+        "method": "Cash",
+        "paymentId": "6c30fc95-078d-4450-8dd3-26ea7cd9ee4e",
+        "updatedAt": "<scrubbed>"
+      }
+    ],
+    "pagination": {
+      "limit": 20,
+      "page": 1,
+      "total": 5,
+      "totalPages": 1
+    },
+    "success": true
+  }
+}

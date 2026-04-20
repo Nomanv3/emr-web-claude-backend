@@ -1,0 +1,186 @@
+{
+  "status": 200,
+  "body": {
+    "data": [
+      {
+        "_id": "<scrubbed>",
+        "age": 57,
+        "gender": "M",
+        "name": "Rajesh Sharma",
+        "patientId": "0b2377d7-9f75-49f2-b147-5a47fcb6c9b2",
+        "phone": "9876543214",
+        "uhid": "UHID00005"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 43,
+        "gender": "F",
+        "name": "Meena Gupta",
+        "patientId": "0b8b0289-2857-41d9-ba5f-fef4ff670117",
+        "phone": "9876543215",
+        "uhid": "UHID00006"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 67,
+        "gender": "M",
+        "name": "Prakash Chandra",
+        "patientId": "0f859552-4361-4a2c-8c76-03e106bc37d8",
+        "phone": "9876543227",
+        "uhid": "UHID00018"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 33,
+        "gender": "F",
+        "name": "Nandini Rao",
+        "patientId": "11758977-a4d7-42de-bf71-cedf7e9f3b88",
+        "phone": "9876543226",
+        "uhid": "UHID00017"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 28,
+        "gender": "F",
+        "name": "Pooja Verma",
+        "patientId": "29676fa1-4ae0-46d9-abd0-5a9933f5d519",
+        "phone": "9876543217",
+        "uhid": "UHID00008"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 61,
+        "gender": "M",
+        "name": "Manoj Tiwari",
+        "patientId": "35482d03-81f5-4bd9-ac7a-59558100324e",
+        "phone": "9876543222",
+        "uhid": "UHID00013"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 37,
+        "gender": "F",
+        "name": "Kavita Nair",
+        "patientId": "47cb2674-0d8a-4299-aefa-0f400b34301d",
+        "phone": "9876543219",
+        "uhid": "UHID00010"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 50,
+        "gender": "M",
+        "name": "Ramesh Kumar",
+        "patientId": "566a052d-b862-461e-9ab3-e5e9a2627622",
+        "phone": "9876543210",
+        "uhid": "UHID00001"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 32,
+        "gender": "F",
+        "name": "Divya Jain",
+        "patientId": "58c3f39e-cf57-4cc3-a61e-437225756dcf",
+        "phone": "9876543232",
+        "uhid": "UHID00023"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 2,
+        "gender": "F",
+        "name": "Aisha Khan",
+        "patientId": "5ed3cafd-4885-4320-b365-d16b57f38515",
+        "phone": "9876543228",
+        "uhid": "UHID00019"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 47,
+        "gender": "M",
+        "name": "Anil Deshmukh",
+        "patientId": "79353ed3-b210-4851-a8c8-af4341c2a791",
+        "phone": "9876543216",
+        "uhid": "UHID00007"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 10,
+        "gender": "M",
+        "name": "Arjun Reddy",
+        "patientId": "9d490523-ce56-4137-a874-ca97cb9d20a4",
+        "phone": "9876543224",
+        "uhid": "UHID00015"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 70,
+        "gender": "F",
+        "name": "Lata Iyer",
+        "patientId": "a78bab81-12b7-4d84-8616-2072df48260b",
+        "phone": "9876543223",
+        "uhid": "UHID00014"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 53,
+        "gender": "M",
+        "name": "Deepak Mishra",
+        "patientId": "ab510dcc-fe95-4252-a769-79b93b11621a",
+        "phone": "9876543220",
+        "uhid": "UHID00011"
+      },
+      {
+        "_id": "<scrubbed>",
+        "gender": "M",
+        "name": "Nady",
+        "patientId": "ac95a857-cf13-4202-9c52-1423ba7b25e5",
+        "phone": "2323232332",
+        "uhid": "UHID00030"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 42,
+        "gender": "F",
+        "name": "Priya Menon",
+        "patientId": "ae523d79-b91a-4dc1-9d54-303e84a7b566",
+        "phone": "9876543230",
+        "uhid": "UHID00021"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 30,
+        "gender": "F",
+        "name": "Anjali Patel",
+        "patientId": "b63d3b7a-6c5d-43ae-84fa-0432f6547ba8",
+        "phone": "9876543213",
+        "uhid": "UHID00004"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 38,
+        "gender": "M",
+        "name": "Amit Saxena",
+        "patientId": "dece5e5f-e1d3-4899-b765-28235e4d8114",
+        "phone": "9876543229",
+        "uhid": "UHID00020"
+      },
+      {
+        "_id": "<scrubbed>",
+        "age": 49,
+        "gender": "M",
+        "name": "Harish Hegde",
+        "patientId": "f32c8e66-8a77-451d-ac11-f03b38546eb0",
+        "phone": "9876543233",
+        "uhid": "UHID00024"
+      },
+      {
+        "_id": "<scrubbed>",
+        "gender": "F",
+        "name": "Asna Khan",
+        "patientId": "ff2fee85-1d0b-43cf-a110-995cbd572d3d",
+        "phone": "9876789876",
+        "uhid": "UHID00027"
+      }
+    ],
+    "success": true
+  }
+}

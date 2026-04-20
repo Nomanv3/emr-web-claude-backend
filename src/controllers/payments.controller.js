@@ -1,51 +1,75 @@
-import Payment from '../models/Payment.js';
-import Invoice from '../models/Invoice.js';
-import Receipt from '../models/Receipt.js';
+import { query, withTransaction } from '../config/mysql.js';
+import { mapPaymentRow, mapReceiptRow } from '../db/mappers/payment.mapper.js';
+import { mapInvoiceRow } from '../db/mappers/invoice.mapper.js';
+import { v4 as uuidv4 } from 'uuid';
+
+async function genReceiptNumberMysql(conn) {
+  // RCT-YYYY-NNNNNN — N counts receipts for the current year
+  const year = new Date().getUTCFullYear();
+  const [[{ cnt }]] = await conn.query(
+    'SELECT COUNT(*) AS cnt FROM receipt WHERE YEAR(generated_at) = ?',
+    [year]
+  );
+  return `RCT-${year}-${String(Number(cnt) + 1).padStart(6, '0')}`;
+}
 
 export const recordPayment = async (req, res, next) => {
   try {
     const { invoiceId, amount, method, transactionRef } = req.body;
+    const collectedBy = req.body.collectedBy || req.user?.userId || null;
 
-    const invoice = await Invoice.findOne({ invoiceId });
-    if (!invoice) {
+    const [[invRow]] = await query(
+      'SELECT * FROM invoice WHERE invoice_id = ? AND deleted_at IS NULL LIMIT 1',
+      [invoiceId]
+    );
+    if (!invRow) {
       return res.status(404).json({
         success: false,
         error: { code: 'INVOICE_NOT_FOUND', message: 'Invoice not found' },
       });
     }
 
-    const payment = new Payment({
-      invoiceId,
-      amount,
-      method,
-      transactionRef,
-      collectedBy: req.body.collectedBy || req.user?.userId,
+    const paymentId = uuidv4();
+    const receiptId = uuidv4();
+    let newStatus = 'Partial';
+    let newPaid = parseFloat(invRow.paid_amount) + Number(amount);
+    let newBalance = parseFloat(invRow.total_amount) - newPaid;
+    if (newBalance <= 0) { newStatus = 'Paid'; newBalance = 0; }
+
+    await withTransaction(async (conn) => {
+      await conn.query(
+        `INSERT INTO payment
+           (payment_id, invoice_id, amount, method, transaction_ref, collected_by, collected_at, receipt_id)
+         VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?)`,
+        [paymentId, invoiceId, Number(amount), method, transactionRef || null, collectedBy, receiptId]
+      );
+      const receiptNumber = await genReceiptNumberMysql(conn);
+      await conn.query(
+        `INSERT INTO receipt (receipt_id, payment_id, invoice_id, receipt_number, generated_at)
+         VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)`,
+        [receiptId, paymentId, invoiceId, receiptNumber]
+      );
+      await conn.query(
+        'UPDATE invoice SET paid_amount = ?, balance_due = ?, status = ? WHERE invoice_id = ?',
+        [newPaid, newBalance, newStatus, invoiceId]
+      );
     });
 
-    await payment.save();
+    const [[pRow]] = await query('SELECT * FROM payment WHERE payment_id = ? LIMIT 1', [paymentId]);
+    const [[rRow]] = await query('SELECT * FROM receipt WHERE receipt_id = ? LIMIT 1', [receiptId]);
+    const [[iRow]] = await query('SELECT * FROM invoice WHERE invoice_id = ? LIMIT 1', [invoiceId]);
+    const [liRows] = await query(
+      'SELECT * FROM invoice_line_items WHERE invoice_id = ? ORDER BY sort_order, id',
+      [invoiceId]
+    );
 
-    const receipt = new Receipt({
-      paymentId: payment.paymentId,
-      invoiceId,
-    });
-    await receipt.save();
-
-    payment.receiptId = receipt.receiptId;
-    await payment.save();
-
-    invoice.paidAmount += amount;
-    invoice.balanceDue = invoice.totalAmount - invoice.paidAmount;
-    if (invoice.balanceDue <= 0) {
-      invoice.status = 'Paid';
-      invoice.balanceDue = 0;
-    } else {
-      invoice.status = 'Partial';
-    }
-    await invoice.save();
-
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
-      data: { payment, receipt, invoice },
+      data: {
+        payment: mapPaymentRow(pRow),
+        receipt: mapReceiptRow(rRow),
+        invoice: mapInvoiceRow(iRow, liRows),
+      },
       message: 'Payment recorded successfully',
     });
   } catch (error) {
@@ -56,36 +80,34 @@ export const recordPayment = async (req, res, next) => {
 export const getPayments = async (req, res, next) => {
   try {
     const { organizationId, startDate, endDate, page = 1, limit = 50 } = req.query;
-
-    let invoiceIds;
-    if (organizationId) {
-      const invoices = await Invoice.find({ organizationId }).select('invoiceId').lean();
-      invoiceIds = invoices.map(inv => inv.invoiceId);
-    }
-
-    const filter = {};
-    if (invoiceIds) filter.invoiceId = { $in: invoiceIds };
-    if (startDate || endDate) {
-      filter.collectedAt = {};
-      if (startDate) filter.collectedAt.$gte = new Date(startDate);
-      if (endDate) filter.collectedAt.$lte = new Date(endDate);
-    }
-
-    const skip = (parseInt(page) - 1) * parseInt(limit);
-    const [payments, total] = await Promise.all([
-      Payment.find(filter).sort({ collectedAt: -1 }).skip(skip).limit(parseInt(limit)),
-      Payment.countDocuments(filter),
-    ]);
-
     const parsedLimit = parseInt(limit);
-    res.json({
+    const parsedPage = parseInt(page);
+
+    const where = [];
+    const params = [];
+    if (organizationId) {
+      where.push('invoice_id IN (SELECT invoice_id FROM invoice WHERE organization_id = ?)');
+      params.push(organizationId);
+    }
+    if (startDate) { where.push('collected_at >= ?'); params.push(new Date(startDate)); }
+    if (endDate)   { where.push('collected_at <= ?'); params.push(new Date(endDate)); }
+    const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : '';
+    const offset = (parsedPage - 1) * parsedLimit;
+
+    const [rows] = await query(
+      `SELECT * FROM payment ${whereSql} ORDER BY collected_at DESC LIMIT ? OFFSET ?`,
+      [...params, parsedLimit, offset]
+    );
+    const [[{ total }]] = await query(`SELECT COUNT(*) AS total FROM payment ${whereSql}`, params);
+
+    return res.json({
       success: true,
-      data: payments,
+      data: rows.map(mapPaymentRow),
       pagination: {
-        page: parseInt(page),
+        page: parsedPage,
         limit: parsedLimit,
-        total,
-        totalPages: Math.ceil(total / parsedLimit),
+        total: Number(total),
+        totalPages: Math.ceil(Number(total) / parsedLimit),
       },
     });
   } catch (error) {
@@ -95,10 +117,11 @@ export const getPayments = async (req, res, next) => {
 
 export const getPaymentHistory = async (req, res, next) => {
   try {
-    const payments = await Payment.find({ invoiceId: req.params.invoiceId })
-      .sort({ collectedAt: -1 });
-
-    res.json({ success: true, data: { payments } });
+    const [rows] = await query(
+      'SELECT * FROM payment WHERE invoice_id = ? ORDER BY collected_at DESC',
+      [req.params.invoiceId]
+    );
+    return res.json({ success: true, data: { payments: rows.map(mapPaymentRow) } });
   } catch (error) {
     next(error);
   }
@@ -106,10 +129,11 @@ export const getPaymentHistory = async (req, res, next) => {
 
 export const getInvoiceReceipts = async (req, res, next) => {
   try {
-    const receipts = await Receipt.find({ invoiceId: req.params.invoiceId })
-      .sort({ generatedAt: -1 });
-
-    res.json({ success: true, data: { receipts } });
+    const [rows] = await query(
+      'SELECT * FROM receipt WHERE invoice_id = ? ORDER BY generated_at DESC',
+      [req.params.invoiceId]
+    );
+    return res.json({ success: true, data: { receipts: rows.map(mapReceiptRow) } });
   } catch (error) {
     next(error);
   }
@@ -117,16 +141,17 @@ export const getInvoiceReceipts = async (req, res, next) => {
 
 export const getReceipt = async (req, res, next) => {
   try {
-    const receipt = await Receipt.findOne({ receiptId: req.params.receiptId });
-
-    if (!receipt) {
+    const [[row]] = await query(
+      'SELECT * FROM receipt WHERE receipt_id = ? LIMIT 1',
+      [req.params.receiptId]
+    );
+    if (!row) {
       return res.status(404).json({
         success: false,
         error: { code: 'RECEIPT_NOT_FOUND', message: 'Receipt not found' },
       });
     }
-
-    res.json({ success: true, data: receipt });
+    return res.json({ success: true, data: mapReceiptRow(row) });
   } catch (error) {
     next(error);
   }
